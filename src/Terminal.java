@@ -13,8 +13,37 @@ Imprima un mensaje de error si una tarjeta no tiene suficientes tickets o
 si el terminal no dispone de un determinado tipo de premio. 
 Imprima cuándo se concede un premio y el número restante de dicho tipo de premio en el terminal. 
 Los premios se canjean siempre a través de un terminal. Un terminal ofrece hasta tres premios.
-*/
+ */
 public class Terminal {
-	
-	
+
+    public Terminal() {
+    }
+
+    public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {
+        if (cantidad > t1.getSaldoCreditos()) {
+            System.out.println("No dispone de tickets suficientes");
+        } else {
+            t1.setSaldoTickets(t1.getSaldoTickets() - cantidad);
+            t2.setSaldoTickets(t2.getSaldoTickets() + cantidad);
+        }
+    }
+
+    public void transferirCreditos(Tarjeta t1, Tarjeta t2, int cantidad) {
+        if (cantidad > t1.getSaldoCreditos()) {
+            System.out.println("No dispone de créditos suficientes");
+        } else {
+            t1.setSaldoCreditos(t1.getSaldoCreditos() - cantidad);
+            t2.setSaldoCreditos(t2.getSaldoCreditos() + cantidad);
+        }
+    }
+
+    public void recargarTarjeta(Tarjeta t, int cantidad) {
+        cantidad *= 2;
+        t.setSaldoCreditos(t.getSaldoCreditos() + cantidad);
+    }
+
+    public String consultarSaldo(Tarjeta t) {
+        String saldo = "Actualmente tienes " + t.getSaldoCreditos() + " créditos y " + t.getSaldoTickets() + "tickets.";
+        return saldo;
+    }
 }
