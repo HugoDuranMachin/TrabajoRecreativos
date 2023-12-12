@@ -5,7 +5,5 @@ Los premios no saben a qué terminal pertenecen.
 */
 
 public class Premio {
-
-	
-	
+    
 }

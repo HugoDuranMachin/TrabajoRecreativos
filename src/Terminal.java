@@ -21,7 +21,7 @@ public class Terminal {
         }
     }
 
-    public void recargarTarjeta(Tarjeta t, int cantidad) {
+    public void recargarCréditos(Tarjeta t, int cantidad) {
         cantidad *= 2;
         t.setSaldoCreditos(t.getSaldoCreditos() + cantidad);
     }
