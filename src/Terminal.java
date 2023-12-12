@@ -3,6 +3,10 @@ public class Terminal {
     public Terminal() {
     }
 
+        public void infoUsuarioDeNumero(int numeroTarjeta){
+	System.out.println(Main.indiceUsuarios.get(Main.numeroTarjetasParaIndice.indexOf(numeroTarjeta)).info());
+    }
+    
     public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {
         if (cantidad > t1.getSaldoCreditos()) {
             System.out.println("No dispone de tickets suficientes");
