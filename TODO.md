@@ -23,5 +23,6 @@ TODO: (Main.java)
     
 TODO: (TestCases.java)
 
-    Crear Tarjetas, usar todas las funciones de Tarjeta, Eliminar estas tarjetas, comprobar que los ArrayList están en orden (Mismo tamaño, etc)
+    Crear Tarjetas, usar todas las funciones de Tarjeta, Eliminar estas tarjetas,
+    comprobar que los ArrayList están en orden (Mismo tamaño, etc)
     
