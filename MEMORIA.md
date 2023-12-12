@@ -5,16 +5,24 @@
 
 [11-DEC]
   
-    Hecho el UML iniciamos un proyecto en Github y estamos una hora coordinandonos para estar ambos dentro, tener acceso e integrarlo con Netbeans.
+    Hecho el UML iniciamos un proyecto en Github y estamos una hora coordinandonos 
+    para estar ambos dentro, tener acceso e integrarlo con Netbeans.
     
-    Creamos un esqueleto principal para las tarjetas y hablamos de crear test cases en un proceso similar a TDD (Test-driven development).
+    Creamos un esqueleto principal para las tarjetas y hablamos 
+    de crear test cases en un proceso similar a TDD (Test-driven development).
     
-    Las tarjetas las guardamos dentro de ArrayList porque el ejercicio nos pide que estas sean Objetos con toda la información guardada en memoria, emulando una tarjeta física. Si las tarjetas no fuese obligatorio que fuesen objetos, estarían guardadas en memoria permanente.
-        	Los ArrayList son nuevos para Hugo, o sea que mediante pair programming discutimos nuestro proceso.
+    Las tarjetas las guardamos dentro de ArrayList porque el ejercicio nos 
+    pide que estas sean Objetos con toda la información guardada en memoria, 
+    emulando una tarjeta física. Si las tarjetas no fuese obligatorio que 
+    fuesen objetos, estarían guardadas en memoria permanente.
+        	
+         Los ArrayList son nuevos para Hugo, o sea que mediante pair 
+         programming discutimos nuestro proceso.
 
 [12-DEC]
     
-    Funcionalidades iniciales de la terminal (Transferencia básica de créditos) y nuevas fuera del enunciado del ejercicio (creación de tarjetas).
+    Funcionalidades iniciales de la terminal (Transferencia básica de créditos)
+    y nuevas fuera del enunciado del ejercicio (creación de tarjetas).
     Creación de la lógica de acceso y modificación de las tarjetas.
     Creacion de test cases iniciales y organización de los archivos.
     
