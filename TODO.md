@@ -1,6 +1,5 @@
 TODO: UNSORTED
 
-
 TODO: (Terminal.java)
 
     CREAR SISTEMA DE CANJEO DE PREMIOS
@@ -19,17 +18,17 @@ TODO: (Terminal.java)
     funcionalidad para mostrar todas las tarjetas que existan 
         en la ArrayList indiceUsuarios
 
- 
-
 TODO: (Main.java)
 
     excepción si numeroTarjeta no existe
     mover infoUsuarioDeNumero dentro de Terminal.java
  
-    
+TODO: (Tarjeta.java) 
+
+    añadir más información al constructor (nombre, relleno)
+    opcional: añadir nombre/información aleatorio?
     
 TODO: (TestCases.java)
 
-    Crear Tarjetas, usar todas las funciones de Tarjeta, Eliminar estas tarjetas (puesto que son un test case),
+    Crear Tarjetas de número aleatorio, usar todas las funciones de Tarjeta, Eliminar estas tarjetas (puesto que son un test case),
     comprobar que los ArrayList están en orden (Mismo tamaño, etc)
-    
