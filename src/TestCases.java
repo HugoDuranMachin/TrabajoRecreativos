@@ -7,13 +7,13 @@ public class TestCases {
     public static void nuevaTarjeta() {
 	Tarjeta t = new Tarjeta(Main.indiceUsuarios.size());
 	Main.indiceUsuarios.add(t);
-	Main.numeroTarjetasUsuario.add(Main.indiceUsuarios.size());
+	Main.numeroTarjetasParaIndice.add(Main.indiceUsuarios.size());
     }
     
      public static void nuevaTarjeta(int numeroTarjeta) {
 	Tarjeta t = new Tarjeta(numeroTarjeta);
 	Main.indiceUsuarios.add(t);
-	Main.numeroTarjetasUsuario.add(numeroTarjeta);
+	Main.numeroTarjetasParaIndice.add(numeroTarjeta);
     }
     
     public static void quitarTarjeta(int index) {
