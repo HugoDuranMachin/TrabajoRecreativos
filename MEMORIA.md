@@ -1,6 +1,7 @@
 
 [PRE-INICIO]
-  Hugo - UML con motivo de ir siendo modificado y evolucionando mientras continuamos con el proyecto.
+
+    Hugo - UML con motivo de ir siendo modificado y evolucionando mientras continuamos con el proyecto.
 
 [11-DEC]
   
