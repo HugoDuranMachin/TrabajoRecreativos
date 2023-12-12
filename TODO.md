@@ -1,12 +1,8 @@
 TODO: UNSORTED
 
 
-    
-    
-
-
 TODO: (Terminal.java)
-    
+
     CREAR SISTEMA DE CANJEO DE PREMIOS
         IMPRIMIR MENSAJE ERROR SI PREMIO FUERA DE STOCK
        
@@ -15,13 +11,13 @@ TODO: (Terminal.java)
         LA TERMINAL SÓLO PODRÁ DISPENSAR ESTE TIPO DE PREMIOS
         LA TERMINAL RECIBE EL STOCK DEL PREMIO CON EL QUE SE CONSTRUYE
      
-    CREAR TARJETAS
-        EVITAR CREAR TARJETAS DEL MISMO NÚMERO
+    funcionalidad para inicializar/crear tarjetas
+        Evitar crear tarjetas del mismo número
 
+    mostrar información de la tarjeta a petición específica
         
-    Crear funcionalidad para mostrar todas las tarjetas que existan 
+    funcionalidad para mostrar todas las tarjetas que existan 
         en la ArrayList indiceUsuarios
-    
 
  
 
