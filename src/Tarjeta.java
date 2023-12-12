@@ -7,9 +7,8 @@ public class Tarjeta {
 	private String nombrePropietario;
 
 	public Tarjeta(int numeroTarjeta) {
-
 		this.numeroTarjeta = numeroTarjeta;
-	}
+	} 
 
 	public Tarjeta(int numeroTarjeta, String nombrePropietario) {
 
