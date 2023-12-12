@@ -1,3 +1,9 @@
+TODO: UNSORTED
+
+
+    
+    
+
 
 TODO: (Terminal.java)
     
@@ -12,6 +18,11 @@ TODO: (Terminal.java)
     CREAR TARJETAS
         EVITAR CREAR TARJETAS DEL MISMO NÚMERO
 
+        
+    Crear funcionalidad para mostrar todas las tarjetas que existan 
+        en la ArrayList indiceUsuarios
+    
+
  
 
 TODO: (Main.java)
@@ -23,6 +34,6 @@ TODO: (Main.java)
     
 TODO: (TestCases.java)
 
-    Crear Tarjetas, usar todas las funciones de Tarjeta, Eliminar estas tarjetas,
+    Crear Tarjetas, usar todas las funciones de Tarjeta, Eliminar estas tarjetas (puesto que son un test case),
     comprobar que los ArrayList están en orden (Mismo tamaño, etc)
     
