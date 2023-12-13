@@ -5,7 +5,7 @@ public class Terminal {
 
     public Terminal() {
     }
-    
+
     public Terminal(String premios[]) {
         this.premios = premios;
     }

@@ -15,7 +15,7 @@ public class Premio {
         this.ticketsNecesarios = ticketsNecesarios;
         this.stock = stock;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
