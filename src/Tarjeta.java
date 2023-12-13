@@ -10,9 +10,9 @@ public class Tarjeta {
         this.UID = UID;
     }
 
-    public Tarjeta(int numeroTarjeta, String nombrePropietario) {
+    public Tarjeta(int UID, String nombrePropietario) {
 
-        this.UID = numeroTarjeta;
+        this.UID = UID;
         this.nombrePropietario = nombrePropietario;
     }
 
