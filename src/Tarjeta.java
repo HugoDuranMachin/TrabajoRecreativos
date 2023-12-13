@@ -3,16 +3,16 @@ public class Tarjeta {
 
     private int saldoCreditos;
     private int saldoTickets;
-    final private int numeroTarjeta;
+    final private int UID;
     private String nombrePropietario;
 
     public Tarjeta(int numeroTarjeta) {
-        this.numeroTarjeta = numeroTarjeta;
+        this.UID = numeroTarjeta;
     }
 
     public Tarjeta(int numeroTarjeta, String nombrePropietario) {
 
-        this.numeroTarjeta = numeroTarjeta;
+        this.UID = numeroTarjeta;
         this.nombrePropietario = nombrePropietario;
     }
 
@@ -24,8 +24,8 @@ public class Tarjeta {
         return this.saldoTickets;
     }
 
-    public int getNumeroTarjeta() {
-        return this.numeroTarjeta;
+    public int getUID() {
+        return this.UID;
     }
 
     public String getNombrePropietario() {
@@ -47,11 +47,11 @@ public class Tarjeta {
     public String info() {
         return "Saldo Tickets: " + getSaldoTickets()
                 + "\nSaldo Créditos: " + getSaldoCreditos()
-                + "\nNúmero de Tarjeta: " + getNumeroTarjeta();
+                + "\nNúmero de Tarjeta: " + getUID();
     }
 
     @Override
     public String toString() {
-        return "Número Tarjeta: " + getNumeroTarjeta();
+        return "Número Tarjeta: " + getUID();
     }
 }

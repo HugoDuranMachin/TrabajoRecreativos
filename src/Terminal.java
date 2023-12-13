@@ -10,8 +10,8 @@ public class Terminal {
         this.premios = premios;
     }
 
-    public void infoUsuarioDeNumero(int numeroTarjeta) {
-        System.out.println(Main.indiceUsuarios.get(Main.numeroTarjetasParaIndice.indexOf(numeroTarjeta)).info());
+    public void printInfoParaUID(int UID) {
+        System.out.println(Main.indiceTarjetas.get(Main.indiceUID.indexOf(UID)).info());
     }
 
     public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {

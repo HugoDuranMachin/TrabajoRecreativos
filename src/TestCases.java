@@ -5,15 +5,15 @@
 public class TestCases {
 
     public static void nuevaTarjeta() {
-        Tarjeta t = new Tarjeta(Main.indiceUsuarios.size());
-        Main.indiceUsuarios.add(t);
-        Main.numeroTarjetasParaIndice.add(Main.indiceUsuarios.size());
+        Tarjeta t = new Tarjeta(Main.indiceTarjetas.size());
+        Main.indiceTarjetas.add(t);
+        Main.indiceUID.add(Main.indiceTarjetas.size());
     }
 
-    public static void nuevaTarjeta(int numeroTarjeta) {
-        Tarjeta t = new Tarjeta(numeroTarjeta);
-        Main.indiceUsuarios.add(t);
-        Main.numeroTarjetasParaIndice.add(numeroTarjeta);
+    public static void nuevaTarjeta(int UID) {
+        Tarjeta t = new Tarjeta(UID);
+        Main.indiceTarjetas.add(t);
+        Main.indiceUID.add(UID);
     }
 
     public static void quitarTarjeta(int index) {

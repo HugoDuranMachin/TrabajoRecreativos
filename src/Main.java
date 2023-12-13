@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static ArrayList<Tarjeta> indiceUsuarios = new ArrayList<>();
-    public static ArrayList<Integer> numeroTarjetasParaIndice = new ArrayList<>();
+    public static ArrayList<Tarjeta> indiceTarjetas = new ArrayList<>();
+    public static ArrayList<Integer> indiceUID = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -12,7 +12,7 @@ public class Main {
 
         TestCases.nuevaTarjeta(99);
 
-        t.infoUsuarioDeNumero(99);
+        t.printInfoParaUID(99);
 
     }
 }
