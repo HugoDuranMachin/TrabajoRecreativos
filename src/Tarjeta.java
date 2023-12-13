@@ -6,8 +6,8 @@ public class Tarjeta {
     final private int UID;
     private String nombrePropietario;
 
-    public Tarjeta(int numeroTarjeta) {
-        this.UID = numeroTarjeta;
+    public Tarjeta(int UID) {
+        this.UID = UID;
     }
 
     public Tarjeta(int numeroTarjeta, String nombrePropietario) {
