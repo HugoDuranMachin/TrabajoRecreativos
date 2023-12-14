@@ -9,10 +9,14 @@ public class Main {
     public static void main(String[] args) {
 
         Terminal t = new Terminal();
-
         TestCases.nuevaTarjeta(99);
 
         t.printInfoParaUID(99);
 
+        Map testingMap = new Map(28,30);
+
+        Map.printMap(testingMap.getMap());
+
     }
 }
+
