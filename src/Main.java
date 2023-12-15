@@ -8,7 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Terminal t = new Terminal();
+        Premio[] premios = new Premio[3];
+        
+        Terminal t = new Terminal(premios);
 
         TestCases.nuevaTarjeta(99);
 
