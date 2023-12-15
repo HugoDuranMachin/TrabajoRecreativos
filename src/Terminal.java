@@ -42,9 +42,7 @@ public class Terminal {
 
     public String canjearPremios(Tarjeta t, Premio p, int cantidad) {
         String respuesta = "Error";
-        if (t.getSaldoTickets() >= (p.getTicketsNecesarios() * cantidad) || cantidad >= p.getStock()
-                || p.getNombre() == premios[0] || p.getNombre() == premios[1] || p.getNombre() == premios[2]) {
-            t.setSaldoTickets(t.getSaldoTickets() - (p.getTicketsNecesarios() * cantidad));
+        if (t.getSaldoTickets() >= (p.getTicketsNecesarios() * cantidad) || cantidad >= p.getStock()) {            t.setSaldoTickets(t.getSaldoTickets() - (p.getTicketsNecesarios() * cantidad));
             p.setStock(p.getStock() - cantidad);
             respuesta = "Operación correcta.\nQuedan " + p.getStock() + " premios";
         }
