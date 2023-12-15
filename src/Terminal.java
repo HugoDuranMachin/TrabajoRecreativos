@@ -1,13 +1,11 @@
 
+
 public class Terminal {
 
-    String[] premios = new String[3];
+    Premio[] premiosEnTerminal = new Premio[3];
 
-    public Terminal() {
-    }
-
-    public Terminal(String premios[]) {
-        this.premios = premios;
+    public Terminal(Premio P[]) {
+        this.premiosEnTerminal = P;
     }
 
     public void printInfoParaUID(int UID) {
