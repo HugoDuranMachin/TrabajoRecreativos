@@ -1,20 +1,29 @@
-/*
-Cada premio tiene un nombre, un número de tickets necesarios para conseguir ese premio y 
-un recuento o stock de los elementos de esta categoría que están asignados a un terminal. 
-Los premios no saben a qué terminal pertenecen.
- */
+import java.util.ArrayList;
 
 public class Premio {
 
-    private String nombre;
-    private int ticketsNecesarios;
+    private final String nombre;
+    private final int ticketsNecesarios;
     private int stock;
+
+    static private ArrayList<Premio> listaPremios = new ArrayList<>();
+    static private final String[] nombresDePremios = {"BALON", "PELUCHE", "FUTBOLIN",
+                                                    "CONSOLA", "FIGURA", "CHUCHES",
+                                                    "ENTRADA", "VIDEOJUEGO", "ROPA",
+                                                    "COMIDA", "MYSTERYBOX"};
 
     public Premio(String nombre, int ticketsNecesarios, int stock) {
         this.nombre = nombre;
         this.ticketsNecesarios = ticketsNecesarios;
         this.stock = stock;
     }
+    public Premio(String nombre) {
+        this.nombre = nombre;
+        this.ticketsNecesarios = Random(200);
+        this.stock = Random(20);
+    }
+
+
 
     public String getNombre() {
         return nombre;
@@ -30,5 +39,23 @@ public class Premio {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public static void premiosDesdeLista() {
+        for (String s : nombresDePremios) {
+            listaPremios.add(new Premio(s));
+        }
+    }
+
+    public static int Random(int limit) {
+        return (int) (Math.random() * limit);
+    }
+
+    public static String listaPremios() {
+        return listaPremios.toString();
+    }
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

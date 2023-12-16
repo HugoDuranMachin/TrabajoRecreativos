@@ -16,5 +16,9 @@ public class Main {
 
         t.printInfoParaUID(99);
 
+        Premio.premiosDesdeLista();
+        System.out.println(Premio.listaPremios());
+
+
     }
 }
