@@ -1,15 +1,31 @@
-
-
 public class Terminal {
 
-    Premio[] premiosEnTerminal;
+     Premio[] premiosEnTerminal;
 
-    public Terminal(Premio[] P) {
-        this.premiosEnTerminal = P;
+     Terminal(int entries, StockPremios sp) {
+
+        this.premiosEnTerminal = new Premio[entries];
+
+        for (int i = 0; i < entries; i++) {
+            premiosEnTerminal[i] = sp.listaPremios.get(myMethods.randomInt(sp.listaPremios.size()));
+        }
+
     }
 
-    public void printInfoParaUID(int UID) {
-        System.out.println(Main.indiceTarjetas.get(Main.indiceUID.indexOf(UID)).info());
+    public void getPremiosDeTerm() {
+        for (Premio p : premiosEnTerminal) {
+            System.out.println(p);
+        }
+    }
+
+    /*
+    TODO:
+    Mucho, esta funcion esta muy incompleta. Pero funciona correctamente.
+     */
+    public void canjearPremio(int index) {
+
+
+        premiosEnTerminal[index].setStock(premiosEnTerminal[index].getStock()-1);
     }
 
     public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {
@@ -36,8 +52,7 @@ public class Terminal {
     }
 
     public String consultarSaldo(Tarjeta t) {
-        String saldo = t.info();
-        return saldo;
+        return t.info();
     }
 
     public String canjearPremios(Tarjeta t, Premio p, int cantidad) {
@@ -49,4 +64,11 @@ public class Terminal {
         }
         return respuesta;
     }
+
+    //Esta funcion la pongo aqui porque emula el uso de una terminal metiendo la tarjeta.
+    public void printInfoParaUID(int UID) {
+        System.out.println(Main.indiceTarjetas.get(Main.indiceUID.indexOf(UID)).info());
+    }
+
+
 }

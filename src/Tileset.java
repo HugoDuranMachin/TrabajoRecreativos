@@ -2,6 +2,7 @@ public final class Tileset {
 
     public static final String ESC = "\u001B";
     public static final String HIDE_CURSOR = ESC+"[?25l";
+    public static final String SHOW_CURSOR = ESC+"[?25h";
     public static final char WALL = '█';
     public static final char PLAYER = '@';
     public static final char TERMINAL = '▼';

@@ -5,30 +5,28 @@ TODO: (Terminal.java)
     CREAR SISTEMA DE CANJEO DE PREMIOS
         IMPRIMIR MENSAJE ERROR SI PREMIO FUERA DE STOCK
        
-    LA TERMINAL SE INICIA CON UN CONSTRUCTOR QUE RECIBE 3 PREMIOS
-        LOS PREMIOS VENDRÁN DE UNA ARRAYLIST DINÁMICA BASADA EN LOS TIPOS DE PREMIOS DISPONIBLES
-        LA TERMINAL SÓLO PODRÁ DISPENSAR ESTE TIPO DE PREMIOS
-        LA TERMINAL RECIBE EL STOCK DEL PREMIO CON EL QUE SE CONSTRUYE
+    [DONE] LA TERMINAL SE INICIA CON UN CONSTRUCTOR QUE RECIBE N PREMIOS
+        [DONE] LOS PREMIOS VENDRÁN DE UNA ARRAYLIST DINÁMICA BASADA EN LOS TIPOS DE PREMIOS DISPONIBLES
+        [DONE] LA TERMINAL SÓLO PODRÁ DISPENSAR ESTE TIPO DE PREMIOS
+        [] LA TERMINAL RECIBE EL STOCK DEL PREMIO CON EL QUE SE CONSTRUYE
      
-    funcionalidad para inicializar/crear tarjetas
-        Evitar crear tarjetas del mismo número
+    FUNCIONALIDAD PARA CREAR TARJETAS DESDE DENTRO DE UNA TERMINAL
+        LOGICA PARA NO CREAR TARJETAS DEL MISMO UID
 
-    mostrar información de la tarjeta a petición específica
-        
     funcionalidad para mostrar todas las tarjetas que existan 
         en la ArrayList indiceUsuarios
 
 TODO: (Main.java)
 
     excepción si numeroTarjeta no existe
-    mover infoUsuarioDeNumero dentro de Terminal.java
- 
+    
+
 TODO: (Tarjeta.java) 
 
     añadir más información al constructor (nombre, relleno)
     opcional: añadir nombre/información aleatorio?
     
-TODO: (TestCases.java)
+TODO: (myMethods.java)
 
     Crear Tarjetas de número aleatorio, usar todas las funciones de Tarjeta, Eliminar estas tarjetas (puesto que son un test case),
     comprobar que los ArrayList están en orden (Mismo tamaño, etc)

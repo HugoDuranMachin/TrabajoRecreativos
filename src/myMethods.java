@@ -2,7 +2,12 @@
 /**
  *@author RM
  */
-public class TestCases {
+public class myMethods {
+
+    public static int randomInt(int limit) {
+        return (int) (Math.random() * limit);
+    }
+
 
     public static void nuevaTarjeta() {
         Tarjeta t = new Tarjeta(Main.indiceTarjetas.size());

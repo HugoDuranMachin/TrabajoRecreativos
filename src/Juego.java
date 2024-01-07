@@ -22,7 +22,7 @@ public class Juego {
     
     public String jugar(Tarjeta t, Juego j) {
         String respuesta = "No dispone de créditos suficientes";
-        int tickets = (int) Math.random()*1000;
+        int tickets = myMethods.randomInt(1000);
         if(t.getSaldoCreditos()>j.getCreditosNecesarios()) {
             t.setSaldoCreditos(t.getSaldoCreditos()-j.getCreditosNecesarios());
             t.setSaldoTickets(tickets);
