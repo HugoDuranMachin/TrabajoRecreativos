@@ -20,5 +20,10 @@ public class Main {
         System.out.println(Premio.listaPremios());
 
 
+        Map testingMap = new Map(28,30);
+
+        Map.printMap(testingMap.getMap());
+
     }
 }
+
