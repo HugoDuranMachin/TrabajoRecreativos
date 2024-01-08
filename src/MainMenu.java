@@ -5,11 +5,7 @@ public class MainMenu {
 
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Terminal> indiceTerms = new ArrayList<>();
-    static StockPremios sp = new StockPremios();
-    
-    static char input() {
-        return sc.next().charAt(0);
-    }
+    static public StockPremios sp = new StockPremios();
 
     public static void firstMenu() {
         System.out.println("""
@@ -18,7 +14,7 @@ public class MainMenu {
                 3 - Modificar terminales
                 0 - Exit""");
 
-        switch (input()) {
+        switch (sc.next().charAt(0)) {
             case '1':
                 loadDefaults();
                 firstMenu();
@@ -44,14 +40,59 @@ public class MainMenu {
                 2 - Añadir un premio
                 3 - Quitar un premio
                 4 - Modificar un premio
+                5 - Ver premios
                 0 - Back""");
 
-        switch (input()) {
+        switch (sc.next().charAt(0)) {
             case '1':
                 sp = new StockPremios(1); menuStockPremios();
             case '2':
-                //TODO: aaehghhh
+                menuAddPremio();
         }
 
     }
+
+    public static void menuAddPremio() {
+        //should never occur
+        String nombrePremioNuevo = "unnamed" + sp.listaPremios.size();
+        int stockPremioNuevo = myMethods.randomInt(20);
+        int precioPremioNuevo = myMethods.randomInt(100);
+        System.out.println("""
+                ¿Nombre para el nuevo premio?
+                0 - Back
+                """);
+
+        String buffer = sc.next();
+        switch (buffer.charAt(0)) {
+            case '0': menuStockPremios();
+            default: nombrePremioNuevo = buffer;
+        }
+
+        System.out.println("""
+                ¿Stock?
+                Cualquier cosa que no sea un numero - Aleatorio
+                """);
+
+        buffer = sc.next();
+        try {
+            stockPremioNuevo = Integer.valueOf(buffer);
+        } catch (Exception e) {
+        }
+
+        System.out.println("""
+                ¿Precio?
+                Cualquier cosa que no sea un numero - Aleatorio
+                """);
+        try {
+            precioPremioNuevo = Integer.valueOf(buffer);
+        } catch (Exception e) {
+        }
+
+        sp.addPremio(nombrePremioNuevo, stockPremioNuevo, precioPremioNuevo);
+        System.out.println("Premio añadido: " + nombrePremioNuevo);
+        menuStockPremios();
+    }
+
+
+
 }

@@ -20,12 +20,16 @@ public class StockPremios {
 
     public void premiosDesdeLista() {
         for (String s : listaNombres) {
-            this.listaPremios.add(new Premio(s));
+            addPremio(s);
         }
     }
 
-    public void addPremio(String s) {
-        this.listaPremios.add(new Premio(s));
+    public void addPremio(String nombre) {
+        this.listaPremios.add(new Premio(nombre));
+    }
+
+    public void addPremio(String nombre, int stock, int precio) {
+         this.listaPremios.add(new Premio(nombre, stock, precio));
     }
 
 }
