@@ -6,7 +6,7 @@ public class StockPremios {
     StockPremios() {
     }
     //truco del almendruco para sobreescribir mas tarde
-    StockPremios(int i) {
+    StockPremios(int cargarValoresPorDefecto) {
         premiosDesdeLista();
     }
 

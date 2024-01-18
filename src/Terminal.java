@@ -7,7 +7,7 @@ public class Terminal {
         this.premiosEnTerminal = new Premio[entries];
 
         for (int i = 0; i < entries; i++) {
-            premiosEnTerminal[i] = sp.listaPremios.get(myMethods.randomInt(sp.listaPremios.size()));
+            premiosEnTerminal[i] = sp.listaPremios.get(Main.randomInt(sp.listaPremios.size()));
         }
 
     }
@@ -65,10 +65,24 @@ public class Terminal {
         return respuesta;
     }
 
-    //Esta funcion la pongo aqui porque emula el uso de una terminal metiendo la tarjeta.
-    public void printInfoParaUID(int UID) {
-        System.out.println(Main.indiceTarjetas.get(Main.indiceUID.indexOf(UID)).info());
+    /*
+    BLOQUE DE MANIPULACION DE TARJETAS
+     */
+    public static void printInfoParaUID(int UID) {
+        System.out.println(Main.mapaTarjetas.get(UID));
     }
 
+    public static void nuevaTarjeta() {
+        Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID));
+        Main.UID++;
+    }
 
+    public static void nuevaTarjeta(String nombre) {
+        Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID, nombre));
+        Main.UID++;
+    }
+
+    public static void quitarTarjeta(int UID) {
+        Main.mapaTarjetas.remove(UID);
+    }
 }

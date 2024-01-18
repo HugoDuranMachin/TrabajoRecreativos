@@ -12,8 +12,8 @@ public class Premio {
 
     public Premio(String nombre) {
         this.nombre = nombre;
-        this.ticketsNecesarios = myMethods.randomInt(200);
-        this.stock = myMethods.randomInt(19) + 1;
+        this.ticketsNecesarios = Main.randomInt(200);
+        this.stock = Main.randomInt(19) + 1;
     }
 
     public String getNombre() {

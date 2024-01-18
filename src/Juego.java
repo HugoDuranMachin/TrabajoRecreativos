@@ -8,11 +8,9 @@ Se imprime el número de tarjeta, el número de tickets ganados al jugar, junto 
 Se imprime un mensaje si una tarjeta no tiene suficientes créditos para jugar.
 */
 public class Juego {
-    private String nombre;
-    private int creditosNecesarios;
+    private final int creditosNecesarios;
     
     public Juego(String nombre, int creditosNecesarios) {
-        this.nombre = nombre;
         this.creditosNecesarios = creditosNecesarios;
     }
 
@@ -22,7 +20,7 @@ public class Juego {
     
     public String jugar(Tarjeta t, Juego j) {
         String respuesta = "No dispone de créditos suficientes";
-        int tickets = myMethods.randomInt(1000);
+        int tickets = Main.randomInt(1000);
         if(t.getSaldoCreditos()>j.getCreditosNecesarios()) {
             t.setSaldoCreditos(t.getSaldoCreditos()-j.getCreditosNecesarios());
             t.setSaldoTickets(tickets);

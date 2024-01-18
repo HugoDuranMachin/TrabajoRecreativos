@@ -5,3 +5,5 @@
 /build.xml
 /.idea
 /out/
+!/src/Map.java
+!/src/Tileset.java
