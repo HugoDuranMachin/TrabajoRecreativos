@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 public class Terminal {
 
-     Premio[] premiosEnTerminal;
+    Premio[] premiosEnTerminal;
 
-     Terminal(int entries, StockPremios sp) {
+    Terminal(int entries, StockPremios sp) {
 
         this.premiosEnTerminal = new Premio[entries];
 
@@ -25,7 +27,7 @@ public class Terminal {
     public void canjearPremio(int index) {
 
 
-        premiosEnTerminal[index].setStock(premiosEnTerminal[index].getStock()-1);
+        premiosEnTerminal[index].setStock(premiosEnTerminal[index].getStock() - 1);
     }
 
     public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {
@@ -84,5 +86,10 @@ public class Terminal {
 
     public static void quitarTarjeta(int UID) {
         Main.mapaTarjetas.remove(UID);
+    }
+
+    @Override
+    public String toString() {
+        return "Premios: " + Arrays.toString(this.premiosEnTerminal);
     }
 }

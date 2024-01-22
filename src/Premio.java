@@ -32,10 +32,14 @@ public class Premio {
         this.stock = stock;
     }
 
-    @Override
-    public String toString() {
+    public String info() {
         return "Premio: " + this.getNombre() +
                 " - Stock: " + this.getStock() +
                 " - Precio: " + this.getTicketsNecesarios();
+    }
+
+    @Override
+    public String toString() {
+        return getNombre();
     }
 }

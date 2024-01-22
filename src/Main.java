@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map;
 
 /*
@@ -16,9 +15,17 @@ public class Main {
     public static Map<Integer, Tarjeta> mapaTarjetas = new HashMap<>();
     static ArrayList<Terminal> listaTerminales = new ArrayList<>();
 
+
     public static void main(String[] args) {
 
-        DriverMenu.firstMenu();
+        loadDefaults();
+        for (int i = 0; i < 18; i++) {
+            listaTerminales.add(new Terminal(randomInt(10), stockPremios));
+            Terminal.nuevaTarjeta();
+        }
+
+        DriverMenu.menuOpcionesTarjetas();
+
 
     }
 
@@ -40,6 +47,8 @@ public class Main {
     public static int randomInt(int limit) {
         return (int) (Math.random() * limit);
     }
+
 }
+
 
 

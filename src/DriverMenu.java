@@ -4,6 +4,15 @@ public class DriverMenu {
 
     static Scanner sc = new Scanner(System.in);
 
+
+    static Object[] arrayTarjetas(){
+        return Main.mapaTarjetas.values().toArray();
+    }
+
+    static Object[] arrayTerminales(){
+        return Main.listaTerminales.toArray();
+    }
+
     public static void firstMenu() {
         System.out.println("1 - Cargar valores por defecto (Sobreescribe)\n" +
                            "2 - Modificar stock de premios\n" +
@@ -17,33 +26,32 @@ public class DriverMenu {
                 Main.loadDefaults();
                 firstMenu();
             case '2':
-                menuStockPremios();
+                menuOpcionesPremios();
             case '3':
                 System.out.println("TODO"); break;
             case '4':
-                menuTarjetas();
+                menuOpcionesTarjetas();
             case '0':
                 break;
         }
     }
 
 
-    public static void menuStockPremios() {
+    public static void menuOpcionesPremios() {
 
         System.out.println("Actualmente hay " + Main.stockPremios.listaPremios.size() + " premios");
         System.out.println("1 - Cargar premios por defecto (Sobreescribe)\n" +
                            "2 - Añadir un premio\n" +
-                           "3 - Quitar un premio\n" +
-                           "4 - Modificar un premio\n" +
-                           "5 - Ver premios\n" +
+                           "3 - Ver y Modificar premios\n" +
                            "0 - Back");
 
         switch (sc.next().charAt(0)) {
             case '1':
                 Main.stockPremios = new StockPremios(1);
-                menuStockPremios();
+                menuOpcionesPremios();
             case '2':
                 menuAddPremio();
+            case '3':
             default:
                 firstMenu();
         }
@@ -59,7 +67,7 @@ public class DriverMenu {
 
         String buffer = sc.next();
         if (buffer.charAt(0) == '0') {
-            menuStockPremios();
+            menuOpcionesPremios();
         }
         nombrePremioNuevo = buffer;
 
@@ -81,10 +89,15 @@ public class DriverMenu {
 
         Main.stockPremios.addPremio(nombrePremioNuevo, stockPremioNuevo, precioPremioNuevo);
         System.out.println("Premio añadido: " + nombrePremioNuevo);
-        menuStockPremios();
+        menuOpcionesPremios();
     }
 
-    public static void menuTarjetas() {
+
+    public static void menuVerPremios() {
+
+    }
+
+    public static void menuOpcionesTarjetas() {
 
         System.out.println("1 - Cargar tres tarjetas\n" +
                            "2 - Ver y Modificar Tarjetas\n" +
@@ -95,75 +108,97 @@ public class DriverMenu {
                 Terminal.nuevaTarjeta();
                 Terminal.nuevaTarjeta();
                 Terminal.nuevaTarjeta();
-                menuTarjetas();
+                menuOpcionesTarjetas();
             case '2':
-                verTarjetas();
-                menuTarjetas();
+                modificarTarjeta(menuVerPaginacion(arrayTarjetas()));
             case '0':
                 firstMenu();
         }
     }
 
-    static int currentPage = 1;
-    static int indexOfCardsInPage = 0;
-    public static void verTarjetas() {
-        int amountCards = Main.mapaTarjetas.size();
-        int counter = 1;
-        System.out.println("Pagina " + currentPage + " de " + (Main.mapaTarjetas.size() / 9 + 1));
-        if (amountCards < indexOfCardsInPage + 7) {
-            for (int i = indexOfCardsInPage; i < amountCards; i++) {
-                System.out.println(counter + ": " + Main.mapaTarjetas.get(i));
-                counter++;
-            }
-            System.out.println("8: Pagina Atras\n" +
-                               "0: Exit Menu");
-        } else {
-            for (int i = indexOfCardsInPage; i < (indexOfCardsInPage + 7); i++) {
-                System.out.println(counter + ": " + Main.mapaTarjetas.get(i));
-                counter++;
-            }
-            System.out.println("8: Pagina Atras\n"+
-                               "9: Pagina Siguiente\n" +
-                               "0: Exit Menu");
-        }
-        paginacionTarjetas();
+    private static int currentPage = 1;
+    private static int indexOfItemInPage = 0;
+
+    private static void resetSeleccionPagina() {
+        indexOfItemInPage = 0;
+        currentPage = 1;
     }
 
-    public static void paginacionTarjetas() {
+    public static int menuVerPaginacion(Object[] obj) {
+        System.out.println("Pagina " + currentPage + " de " + (obj.length / 9 + 1));
+        boolean hayMasDeSieteItemsAMostrar = obj.length >= indexOfItemInPage + 7;
+        if (hayMasDeSieteItemsAMostrar) {
+            verItemsPagina(obj);
+        } else {
+            verItemsPaginaUltima(obj);
+        }
+        return seleccionDeItemEnPagina(obj);
+    }
 
-        char buffer = sc.next().charAt(0);
-        switch (buffer) {
+    public static void verItemsPagina(Object[] obj) {
+        for (int i = indexOfItemInPage + 7; i > indexOfItemInPage; indexOfItemInPage++) {
+            System.out.println(indexOfItemInPage %7+1 + ": " + obj[indexOfItemInPage]);
+        }
+        System.out.println("8: Pagina Atras\n"+
+                "9: Pagina Siguiente\n" +
+                "0: Exit Menu");
+    }
+
+    public static void verItemsPaginaUltima(Object[] obj) {
+        while (indexOfItemInPage < obj.length) {
+            System.out.println(indexOfItemInPage %7+1 + ": " + obj[indexOfItemInPage]);
+            indexOfItemInPage++;
+            System.out.println("8: Pagina Atras\n" +
+                                "0: Exit Menu");
+        }
+    }
+
+    public static int seleccionDeItemEnPagina(Object[] obj) {
+
+        char selection = sc.next().charAt(0);
+        switch (selection) {
+            case '8':
+                paginaAnterior(obj);
+                sc.next();
+                break;
+            case '9':
+                paginaSiguiente(obj);
+                sc.next();
+                break;
             case '1': case '2': case '3': case '4':
             case '5': case '6': case '7':
-                modificarTarjeta((buffer - 48));
-                break;
-            case '8':
-                if (currentPage != 1) {
-                    indexOfCardsInPage = indexOfCardsInPage - 7;
-                    currentPage--;
-                    verTarjetas();
-                }
-                System.out.println("No hay pagina anterior");
-                paginacionTarjetas();
-            case '9':
-                if ((indexOfCardsInPage + 7) < Main.mapaTarjetas.size()) {
-                    indexOfCardsInPage = indexOfCardsInPage + 7;
-                    currentPage++;
-                    verTarjetas();
-                }
-                System.out.println("No hay siguiente pagina");
-                paginacionTarjetas();
+                return selection-48;
             case '0': default:
-                DriverMenu.menuTarjetas();
+                resetSeleccionPagina();
+                DriverMenu.menuOpcionesTarjetas();
         }
+        return 0;
+    }
 
+    private static void paginaAnterior(Object[] obj) {
+        if (currentPage != 1) {
+            indexOfItemInPage = indexOfItemInPage -14;
+            currentPage--;
+            menuVerPaginacion(obj);
+        }
+        System.out.println("No hay pagina anterior");
+        seleccionDeItemEnPagina(obj);
+    }
+
+    private static void paginaSiguiente(Object[] obj) {
+        if (indexOfItemInPage < Main.mapaTarjetas.size()) {
+            currentPage++;
+            menuVerPaginacion(obj);
+        }
+        System.out.println("No hay siguiente pagina");
+        seleccionDeItemEnPagina(obj);
     }
 
     public static void modificarTarjeta(int selection) {
 
-        int adjustedUIDForOffset = (currentPage - 1) *7 + selection - 1; //Me salto el index 0 cada vez
+        selection = indexOfItemInPage - (8-selection);
 
-        System.out.println("Que desea hacer con " + Main.mapaTarjetas.get(adjustedUIDForOffset));
+        System.out.println("Que desea hacer con " + Main.mapaTarjetas.get(selection));
 
         System.out.println("1 - Eliminar la tarjeta\n" +
                            "2 - Modificar su nombre\n" +
@@ -171,16 +206,17 @@ public class DriverMenu {
 
         switch (sc.next().charAt(0)) {
             case '1':
-                Terminal.quitarTarjeta(adjustedUIDForOffset);
-                verTarjetas();
+                Terminal.quitarTarjeta(selection);
+                menuVerPaginacion(arrayTarjetas());
             case '2':
                 System.out.println("Escriba el nuevo nombre");
                 sc.nextLine();
-                Main.mapaTarjetas.get(adjustedUIDForOffset).setNombrePropietario(sc.nextLine());
-                System.out.println("Informacion actualizada: " + Main.mapaTarjetas.get(adjustedUIDForOffset));
-                verTarjetas();
+                Main.mapaTarjetas.get(selection).setNombrePropietario(sc.nextLine());
+                System.out.println("Informacion actualizada: " + Main.mapaTarjetas.get(selection));
+                resetSeleccionPagina();
+                menuVerPaginacion(arrayTarjetas());
             default:
-                firstMenu();
+                menuOpcionesTarjetas();
         }
     }
 }
