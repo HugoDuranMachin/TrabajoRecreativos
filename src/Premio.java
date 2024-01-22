@@ -1,7 +1,7 @@
 public class Premio {
 
-    private final String nombre;
-    private final int ticketsNecesarios;
+    private String nombre;
+    private int ticketsNecesarios;
     private int stock;
 
     public Premio(String nombre, int ticketsNecesarios, int stock) {
@@ -30,6 +30,10 @@ public class Premio {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public void setNombre (String nombre) {
+        this.nombre = nombre;
     }
 
     public String info() {

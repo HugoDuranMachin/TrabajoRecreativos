@@ -25,11 +25,14 @@ public class MenuOpcionesTerminales {
         }
     }
 
-    public static void modificarTerminal(int selection) {
+    public static void modificarTerminal(int indexDeTerminalSeleccionada) {
 
-        selection = DriverMenu.indexOfItemInPage - (8-selection);
+        indexDeTerminalSeleccionada = DriverMenu.indexOfItemInPage - (8-indexDeTerminalSeleccionada);
+        Terminal terminalSeleccionada = Main.listaTerminales.get(indexDeTerminalSeleccionada);
+        Object[] premiosDeTerminalT = terminalSeleccionada.premiosEnTerminal.toArray();
+        int indexDePremioSeleccionado;
 
-        System.out.println("Que desea hacer con " + Main.listaTerminales.get(selection));
+        System.out.println("Que desea hacer con " + terminalSeleccionada);
 
         System.out.println("1 - Eliminar la terminal\n" +
                 "2 - Modificar los premios de la terminal\n" +
@@ -37,16 +40,18 @@ public class MenuOpcionesTerminales {
 
         switch (Main.input()) {
             case '1':
-                Main.listaTerminales.remove(selection);
+                Main.listaTerminales.remove(indexDeTerminalSeleccionada);
                 DriverMenu.menuVerPaginacion(arrayTerminales());
             case '2':
-                /*
-                TODO: mover premios a su propio .java, terminar este menu, terminar la aplicacion
-                 */
-                
-                System.out.println("menu de modificacion de items de terminal");
+                indexDePremioSeleccionado = (DriverMenu.menuVerPaginacion(premiosDeTerminalT)) -1;
+                Premio premioSeleccionado = terminalSeleccionada.premiosEnTerminal.get(indexDePremioSeleccionado);
+                MenuEditarPremiosEnTerminal.menu(
+                        premioSeleccionado,
+                        terminalSeleccionada,
+                        indexDeTerminalSeleccionada,
+                        indexDePremioSeleccionado
+                );
                 DriverMenu.resetSeleccionPagina();
-                DriverMenu.menuVerPaginacion(arrayTerminales());
             default:
                 menu();
         }

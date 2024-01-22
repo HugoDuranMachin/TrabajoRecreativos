@@ -1,17 +1,22 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Terminal {
 
-    Premio[] premiosEnTerminal;
+    ArrayList<Premio> premiosEnTerminal;
 
     Terminal(int entries, StockPremios sp) {
 
-        this.premiosEnTerminal = new Premio[entries];
+        this.premiosEnTerminal = new ArrayList<>();
 
         for (int i = 0; i < entries; i++) {
-            premiosEnTerminal[i] = sp.listaPremios.get(Main.randomInt(sp.listaPremios.size()));
-        }
+            premiosEnTerminal.add(premioAleatorioDeStock(sp));
+        };
 
+    }
+
+    static Premio premioAleatorioDeStock(StockPremios sp) {
+        return sp.listaPremios.get(Main.randomInt(sp.listaPremios.size()));
     }
 
     public void getPremiosDeTerm() {
@@ -26,8 +31,7 @@ public class Terminal {
      */
     public void canjearPremio(int index) {
 
-
-        premiosEnTerminal[index].setStock(premiosEnTerminal[index].getStock() - 1);
+        premiosEnTerminal.get(index).setStock(premiosEnTerminal.get(index).getStock() - 1);
     }
 
     public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {
@@ -90,6 +94,6 @@ public class Terminal {
 
     @Override
     public String toString() {
-        return "Premios: " + Arrays.toString(this.premiosEnTerminal);
+        return "Premios: " + Arrays.toString(new ArrayList[]{this.premiosEnTerminal});
     }
 }

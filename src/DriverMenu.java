@@ -1,6 +1,6 @@
 public class DriverMenu {
 
-    static int pointerToLastMenuAccessed = 0;
+    static char pointerToLastMenuAccessed = 0;
 
     public static void menu() {
         System.out.println("1 - Cargar valores por defecto (Sobreescribe)\n" +
@@ -11,16 +11,16 @@ public class DriverMenu {
                            "0 - Exit");
 
         pointerToLastMenuAccessed = Main.input();
-        menuControlOpciones(pointerToLastMenuAccessed);
+        optionsForMenu(pointerToLastMenuAccessed);
     }
 
-    static void menuControlOpciones(int selection) {
+    static void optionsForMenu(int selection) {
         switch (selection) {
             case '1':
                 Main.loadDefaults();
                 menu();
             case '2':
-                menuOpcionesPremios();
+                MenuOpcionesPremios.menu();
             case '3':
                 MenuOpcionesTerminales.menu();
             case '4':
@@ -29,65 +29,6 @@ public class DriverMenu {
                 break;
         }
     }
-
-    public static void menuOpcionesPremios() {
-
-        System.out.println("Actualmente hay " + Main.stockPremios.listaPremios.size() + " premios");
-        System.out.println("1 - Cargar premios por defecto (Sobreescribe)\n" +
-                           "2 - Añadir un premio\n" +
-                           "3 - Ver y Modificar premios\n" +
-                           "0 - Back");
-
-        switch (Main.input()) {
-            case '1':
-                Main.stockPremios = new StockPremios(1);
-                menuOpcionesPremios();
-            case '2':
-                menuAddPremio();
-            case '3':
-            default:
-                menu();
-        }
-    }
-
-    public static void menuAddPremio() {
-        String nombrePremioNuevo;
-        int stockPremioNuevo = Main.randomInt(20);
-        int precioPremioNuevo = Main.randomInt(100);
-        System.out.println("¿Nombre para el nuevo premio?\n" +
-                           "0 - Back\n");
-
-        String buffer = Main.sc.next();
-        if (buffer.charAt(0) == '0') {
-            menuOpcionesPremios();
-        }
-        nombrePremioNuevo = buffer;
-
-        System.out.println("¿Stock?\n" +
-                           "Cualquier cosa que no sea un numero - Aleatorio\n");
-
-        buffer = Main.sc.next();
-        try {
-            stockPremioNuevo = Integer.parseInt(buffer);
-        } catch (Exception ignored) {
-        }
-
-        System.out.println("¿Precio?\n" +
-                           "Cualquier cosa que no sea un numero - Aleatorio\n");
-        try {
-            precioPremioNuevo = Integer.parseInt(buffer);
-        } catch (Exception ignored) {
-        }
-
-        Main.stockPremios.addPremio(nombrePremioNuevo, stockPremioNuevo, precioPremioNuevo);
-        System.out.println("Premio añadido: " + nombrePremioNuevo);
-        menuOpcionesPremios();
-    }
-
-    public static void menuVerPremios() {
-
-    }
-
 
     public static int currentPage = 1;
     public static int indexOfItemInPage = 0;
@@ -122,6 +63,7 @@ public class DriverMenu {
             System.out.println(indexOfItemInPage %7+1 + ": " + obj[indexOfItemInPage]);
             indexOfItemInPage++;
         }
+        indexOfItemInPage += 7 - (obj.length % 7);
         System.out.println("8: Pagina Atras\n" +
                 "0: Exit Menu");
     }
@@ -138,11 +80,12 @@ public class DriverMenu {
                 break;
             case '0': default:
                 resetSeleccionPagina();
-                menuControlOpciones(pointerToLastMenuAccessed);
+                optionsForMenu(pointerToLastMenuAccessed);
                 break;
             case '1': case '2': case '3': case '4':
             case '5': case '6': case '7':
         }
+        resetSeleccionPagina();
         return selection-48;
     }
 
@@ -157,7 +100,7 @@ public class DriverMenu {
     }
 
     private static void paginaSiguiente(Object[] obj) {
-        if (indexOfItemInPage < Main.mapaTarjetas.size()) {
+        if (indexOfItemInPage < obj.length) {
             currentPage++;
             menuVerPaginacion(obj);
         }
