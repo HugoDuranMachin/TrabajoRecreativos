@@ -15,18 +15,26 @@ public class Main {
     public static Map<Integer, Tarjeta> mapaTarjetas = new HashMap<>();
     static ArrayList<Terminal> listaTerminales = new ArrayList<>();
 
+    static Scanner sc = new Scanner(System.in);
+
+    static char input(){
+        char buffer = sc.next().charAt(0);
+        sc.nextLine();
+        return buffer;
+    }
 
     public static void main(String[] args) {
 
         loadDefaults();
+
+        //remove at some point
         for (int i = 0; i < 18; i++) {
-            listaTerminales.add(new Terminal(randomInt(10), stockPremios));
+            addTerminal();
             Terminal.nuevaTarjeta();
         }
 
-        DriverMenu.menuOpcionesTarjetas();
 
-
+        DriverMenu.menu();
     }
 
     public static void loadDefaults() {
@@ -48,6 +56,9 @@ public class Main {
         return (int) (Math.random() * limit);
     }
 
+    public static void addTerminal() {
+        listaTerminales.add(new Terminal(randomInt(10), stockPremios));
+    }
 }
 
 
