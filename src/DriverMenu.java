@@ -62,11 +62,13 @@ public class DriverMenu {
         int lastPage = (obj.length/7) + 1;
         if (pagina <= 0) {
             System.out.println("No hay página anterior");
+            currentPage++;
             seleccionDeItem(obj);
         }
 
         if (pagina > lastPage) {
             System.out.println("No hay página siguiente");
+            currentPage--;
             seleccionDeItem(obj);
         }
 
