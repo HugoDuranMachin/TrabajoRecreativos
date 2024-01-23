@@ -17,15 +17,13 @@ public class MenuOpcionesTarjetas {
                 Terminal.nuevaTarjeta();
                 menu();
             case '2':
-                modificarTarjeta(DriverMenu.menuVerPaginacion(arrayTarjetas()));
+                modificarTarjeta(DriverMenu.seleccionDeItem(arrayTarjetas()));
             case '0':
                 DriverMenu.menu();
         }
     }
 
     public static void modificarTarjeta(int selection) {
-
-        selection = DriverMenu.indexOfItemInPage - (8 - selection);
 
         System.out.println("Que desea hacer con " + Main.mapaTarjetas.get(selection));
 
@@ -36,13 +34,12 @@ public class MenuOpcionesTarjetas {
         switch (Main.input()) {
             case '1':
                 Terminal.quitarTarjeta(selection);
-                DriverMenu.menuVerPaginacion(arrayTarjetas());
+                DriverMenu.seleccionDeItem(arrayTarjetas());
             case '2':
                 System.out.println("Escriba el nuevo nombre");
-                Main.mapaTarjetas.get(selection).setNombrePropietario(Main.sc.nextLine());
+                Main.mapaTarjetas.get(selection).setNombrePropietario(Main.inputFull());
                 System.out.println("Informacion actualizada: " + Main.mapaTarjetas.get(selection));
-                DriverMenu.resetSeleccionPagina();
-                DriverMenu.menuVerPaginacion(arrayTarjetas());
+                DriverMenu.seleccionDeItem(arrayTarjetas());
             default:
                 menu();
         }

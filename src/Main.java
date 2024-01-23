@@ -16,11 +16,12 @@ public class Main {
     static ArrayList<Terminal> listaTerminales = new ArrayList<>();
 
     static Scanner sc = new Scanner(System.in);
-
     static char input(){
-        char buffer = sc.next().charAt(0);
-        sc.nextLine();
-        return buffer;
+        return sc.nextLine().charAt(0);
+    }
+
+    static String inputFull(){
+        return sc.nextLine();
     }
 
     public static void main(String[] args) {
@@ -32,8 +33,7 @@ public class Main {
             addTerminal();
             Terminal.nuevaTarjeta();
         }
-
-        DriverMenu.menu();
+        DriverMenu.seleccionDeItem(MenuOpcionesTerminales.arrayTerminales());
 
 
     }

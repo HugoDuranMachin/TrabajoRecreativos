@@ -20,7 +20,7 @@ public class MenuOpcionesPremios {
             case '2':
                 menuAddPremio();
             case '3':
-                int indicePremioSeleccionado = (DriverMenu.menuVerPaginacion(arrayPremios())-1);
+                int indicePremioSeleccionado = (DriverMenu.seleccionDeItem(arrayPremios())-1);
                 Premio premioSeleccionado = Main.stockPremios.listaPremios.get(indicePremioSeleccionado);
                 menuModificarPremio(premioSeleccionado, indicePremioSeleccionado);
             default:
@@ -40,7 +40,7 @@ public class MenuOpcionesPremios {
         System.out.println("¿Nombre para el premio?\n" +
                 "0 - Back\n");
 
-        String buffer = Main.sc.next();
+        String buffer = Main.inputFull();
         if (buffer.charAt(0) == '0') {
             menu();
         }

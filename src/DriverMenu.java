@@ -21,94 +21,77 @@ public class DriverMenu {
                 menu();
             case '2':
                 MenuOpcionesPremios.menu();
+                break;
             case '3':
                 MenuOpcionesTerminales.menu();
+                break;
             case '4':
                 MenuOpcionesTarjetas.menu();
-            case '0': default:
                 break;
+            case '0': default:
+                return;
         }
+        menu();
     }
 
     public static int currentPage = 1;
-    public static int indexOfItemInPage = 0;
 
-    public static void resetSeleccionPagina() {
-        indexOfItemInPage = 0;
-        currentPage = 1;
+    public static int seleccionDeItem(Object[] obj) {
+        verPagina(obj, currentPage);
+        char selection = Main.input();
+        switch (selection) {
+            case '1': case '2': case '3': case '4':
+            case '5': case '6': case '7':
+                return selection-48;
+            case '8':
+                currentPage = currentPage-1;
+                seleccionDeItem(obj);
+                break;
+            case '9':
+                currentPage = currentPage+1;
+                seleccionDeItem(obj);
+                break;
+            case '0': default:
+                optionsForMenu(pointerToLastMenuAccessed);
+                break;
+        }
+        return 0;
     }
 
-    public static int menuVerPaginacion(Object[] obj) {
-        System.out.println("Pagina " + currentPage + " de " + (obj.length / 9 + 1));
-        boolean hayMasDeSieteItemsAMostrar = obj.length >= indexOfItemInPage + 7;
-        if (hayMasDeSieteItemsAMostrar) {
-            verItemsPagina(obj);
-        } else {
-            verItemsPaginaUltima(obj);
+    public static void verPagina(Object[] obj, int pagina) {
+        int lastPage = (obj.length/7) + 1;
+        if (pagina <= 0) {
+            System.out.println("No hay página anterior");
+            seleccionDeItem(obj);
         }
-        return seleccionDeItemEnPagina(obj);
+
+        if (pagina > lastPage) {
+            System.out.println("No hay página siguiente");
+            seleccionDeItem(obj);
+        }
+
+        verItemsEnPagina(obj, pagina);
     }
 
-    public static void verItemsPagina(Object[] obj) {
-        for (int i = indexOfItemInPage + 7; i > indexOfItemInPage; indexOfItemInPage++) {
-            System.out.println(indexOfItemInPage %7+1 + ": " + obj[indexOfItemInPage]);
+    public static void verItemsEnPagina(Object[] obj, int pagina) {
+        int lastPage = (obj.length/7) + 1;
+        boolean isLastPage = (pagina == lastPage);
+
+        currentPage = pagina;
+        int iteratedItemInPage = (pagina-1) * 7;
+        int lastItemInPage = iteratedItemInPage + (isLastPage ? obj.length%7 : 7) ;
+
+        System.out.println("Pagina: " + pagina + " de " + lastPage);
+
+        for (int i = 0; iteratedItemInPage < lastItemInPage; i++) {
+            System.out.println((i + 1) + ": " + obj[iteratedItemInPage]);
+            iteratedItemInPage++;
         }
+
         System.out.println("8: Pagina Atras\n"+
                 "9: Pagina Siguiente\n" +
                 "0: Exit Menu");
     }
-
-    public static void verItemsPaginaUltima(Object[] obj) {
-        while (indexOfItemInPage < obj.length) {
-            System.out.println(indexOfItemInPage %7+1 + ": " + obj[indexOfItemInPage]);
-            indexOfItemInPage++;
-        }
-        indexOfItemInPage += 7 - (obj.length % 7);
-        System.out.println("8: Pagina Atras\n" +
-                "0: Exit Menu");
-    }
-
-    public static int seleccionDeItemEnPagina(Object[] obj) {
-
-        char selection = Main.input();
-        switch (selection) {
-            case '8':
-                paginaAnterior(obj);
-                break;
-            case '9':
-                paginaSiguiente(obj);
-                break;
-            case '0': default:
-                resetSeleccionPagina();
-                optionsForMenu(pointerToLastMenuAccessed);
-                break;
-            case '1': case '2': case '3': case '4':
-            case '5': case '6': case '7':
-        }
-        resetSeleccionPagina();
-        return selection-48;
-    }
-
-    private static void paginaAnterior(Object[] obj) {
-        if (currentPage != 1) {
-            indexOfItemInPage = indexOfItemInPage -14;
-            currentPage--;
-            menuVerPaginacion(obj);
-        }
-        System.out.println("No hay pagina anterior");
-        seleccionDeItemEnPagina(obj);
-    }
-
-    private static void paginaSiguiente(Object[] obj) {
-        if (indexOfItemInPage < obj.length) {
-            currentPage++;
-            menuVerPaginacion(obj);
-        }
-        System.out.println("No hay siguiente pagina");
-        seleccionDeItemEnPagina(obj);
-    }
-
-
 }
 
 

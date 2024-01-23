@@ -28,7 +28,6 @@ public class MenuEditarPremiosEnTerminal {
             case '2':
                 System.out.println("menu de modificacion de un premio de la terminal");
                 MenuOpcionesPremios.menuModificarPremio(premioSelected, indexPremio);
-                DriverMenu.resetSeleccionPagina();
                 switchForMenu(selection);
             default:
                 MenuOpcionesTerminales.modificarTerminal(Main.listaTerminales.indexOf(terminalSelected));

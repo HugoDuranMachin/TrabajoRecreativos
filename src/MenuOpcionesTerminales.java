@@ -1,3 +1,5 @@
+import java.sql.Driver;
+
 public class MenuOpcionesTerminales {
 
 
@@ -18,17 +20,20 @@ public class MenuOpcionesTerminales {
                 Main.addTerminal();
                 menu();
             case '2':
-                modificarTerminal(DriverMenu.menuVerPaginacion(arrayTerminales()));
+                modificarTerminal(DriverMenu.seleccionDeItem(arrayTerminales()));
                 menu();
             case '0':
                 DriverMenu.menu();
         }
     }
 
-    public static void modificarTerminal(int indexDeTerminalSeleccionada) {
+    public static void modificarTerminal(int input) {
 
-        indexDeTerminalSeleccionada = DriverMenu.indexOfItemInPage - (8-indexDeTerminalSeleccionada);
-        Terminal terminalSeleccionada = Main.listaTerminales.get(indexDeTerminalSeleccionada);
+        int currentPageIndexZero = DriverMenu.currentPage-1;
+        input = input - 1 - currentPageIndexZero;
+        input = currentPageIndexZero * 7 + input;
+        System.out.println(input);
+        Terminal terminalSeleccionada = Main.listaTerminales.get(input);
         Object[] premiosDeTerminalT = terminalSeleccionada.premiosEnTerminal.toArray();
         int indexDePremioSeleccionado;
 
@@ -40,18 +45,17 @@ public class MenuOpcionesTerminales {
 
         switch (Main.input()) {
             case '1':
-                Main.listaTerminales.remove(indexDeTerminalSeleccionada);
-                DriverMenu.menuVerPaginacion(arrayTerminales());
+                Main.listaTerminales.remove(input);
+                DriverMenu.verPagina(arrayTerminales(), 1);
             case '2':
-                indexDePremioSeleccionado = (DriverMenu.menuVerPaginacion(premiosDeTerminalT)) -1;
+                indexDePremioSeleccionado = (DriverMenu.seleccionDeItem(premiosDeTerminalT)) -1;
                 Premio premioSeleccionado = terminalSeleccionada.premiosEnTerminal.get(indexDePremioSeleccionado);
                 MenuEditarPremiosEnTerminal.menu(
                         premioSeleccionado,
                         terminalSeleccionada,
-                        indexDeTerminalSeleccionada,
+                        input,
                         indexDePremioSeleccionado
                 );
-                DriverMenu.resetSeleccionPagina();
             default:
                 menu();
         }
