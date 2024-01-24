@@ -1,5 +1,8 @@
 public class MenuOpcionesPremios {
-    static Object[] arrayPremios() {return Main.stockPremios.listaPremios.toArray();}
+    static Object[] arrayPremios() {
+        return Main.stockPremios.listaPremios.toArray();
+    }
+
     public static void menu() {
 
         System.out.println("Actualmente hay " + Main.stockPremios.listaPremios.size() + " premios");
@@ -20,7 +23,7 @@ public class MenuOpcionesPremios {
             case '2':
                 menuAddPremio();
             case '3':
-                int indicePremioSeleccionado = (DriverMenu.seleccionDeItem(arrayPremios())-1);
+                int indicePremioSeleccionado = (DriverMenu.seleccionDeItem(arrayPremios()) - 1);
                 Premio premioSeleccionado = Main.stockPremios.listaPremios.get(indicePremioSeleccionado);
                 menuModificarPremio(premioSeleccionado, indicePremioSeleccionado);
             case '0':
@@ -31,7 +34,6 @@ public class MenuOpcionesPremios {
     }
 
     public static void menuAddPremio() {
-
         String nombrePremioNuevo = nuevoNombreParaPremio();
         Main.stockPremios.addPremio(nuevoNombreParaPremio(), nuevoStockParaPremio(), nuevoPrecioParaPremio());
         System.out.println("Premio añadido: " + nombrePremioNuevo);
@@ -62,16 +64,17 @@ public class MenuOpcionesPremios {
         return Main.input() - 48;
 
     }
+
     static int nuevoPrecioParaPremio() {
 
         System.out.println("¿Precio?\n" +
                 "No he hecho que esto mire si es un número o no! " +
                 "Ahora mismo no me importa!\n");
 
-        return Main.input() -48;
-        }
+        return Main.input() - 48;
+    }
 
-    public static void menuModificarPremio(Premio p, int index){
+    public static void menuModificarPremio(Premio p, int index) {
 
         System.out.println("Que desea hacer con " + p + "? (Se aplica a todas las instancias de este premio)");
 
@@ -113,5 +116,5 @@ public class MenuOpcionesPremios {
 
     }
 
-         //STOP
+    //STOP
 }

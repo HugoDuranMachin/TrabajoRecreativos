@@ -11,7 +11,8 @@ public class Terminal {
 
         for (int i = 0; i < entries; i++) {
             premiosEnTerminal.add(premioAleatorioDeStock(sp));
-        };
+        }
+        ;
 
     }
 
@@ -29,10 +30,6 @@ public class Terminal {
         }
     }
 
-    /*
-    TODO:
-    Mucho, esta funcion esta muy incompleta. Pero funciona correctamente.
-     */
     public void canjearPremio(int index) {
 
         premiosEnTerminal.get(index).setStock(premiosEnTerminal.get(index).getStock() - 1);
@@ -84,6 +81,11 @@ public class Terminal {
 
     public static void nuevaTarjeta() {
         Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID));
+        Main.UID++;
+    }
+
+    public static void nuevaTarjeta(String nombre, int creditos) {
+        Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID, nombre, creditos));
         Main.UID++;
     }
 

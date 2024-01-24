@@ -1,6 +1,6 @@
 public class MenuOpcionesTerminales {
 
-    static Object[] arrayTerminales(){
+    static Object[] arrayTerminales() {
         return Main.listaTerminales.toArray();
     }
 

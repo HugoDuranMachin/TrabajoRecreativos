@@ -10,11 +10,10 @@ public class Tarjeta {
         this.uniqueID = UID;
     }
 
-    Tarjeta(int UID, String nombre, int tickets, int creditos) {
+    Tarjeta(int UID, String nombre, int tickets) {
         this.uniqueID = UID;
         this.nombrePropietario = nombre;
         this.saldoTickets = tickets;
-        this.saldoCreditos = creditos;
     }
 
     public int getSaldoCreditos() {

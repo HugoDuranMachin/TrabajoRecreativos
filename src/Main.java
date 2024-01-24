@@ -1,13 +1,7 @@
 import java.util.*;
 import java.util.Map;
 
-/*
-TODO:
-Cargar creditos en cada tarjeta (Crear una opcion en el menu driver que cargue creditos)
-Jugar a "varios juegos"
-Transferir Creditos y Tickets
-Intentar jugar y solicitar un premio con la tarjeta 1
-*/
+
 public class Main {
 
     static int UID = 0;
@@ -16,13 +10,20 @@ public class Main {
     static ArrayList<Terminal> listaTerminales = new ArrayList<>();
 
     static Scanner sc = new Scanner(System.in);
-    static char input(){
+
+    static char input() {
         return sc.nextLine().charAt(0);
     }
 
-    static String inputFull(){
+    static String inputFull() {
         return sc.nextLine();
     }
+
+    /*
+    TODO:
+        Puedes crear una tarjeta sin existir una terminal, porque son metodos estaticos
+        No se si eso es lo que quiero.
+     */
 
     public static void main(String[] args) {
         DriverMenu.menu();
@@ -37,9 +38,9 @@ public class Main {
         listaTerminales.add(new Terminal(3, stockPremios));
 
         mapaTarjetas.clear();
-        Terminal.nuevaTarjeta();
-        Terminal.nuevaTarjeta();
-        Terminal.nuevaTarjeta();
+        Terminal.nuevaTarjeta("Nombre1", randomInt(500));
+        Terminal.nuevaTarjeta("Nombre2", randomInt(1000));
+        Terminal.nuevaTarjeta("Nombre3", randomInt(1500));
 
     }
 
