@@ -12,7 +12,6 @@ public class Terminal {
         for (int i = 0; i < entries; i++) {
             premiosEnTerminal.add(premioAleatorioDeStock(sp));
         }
-        ;
 
     }
 
