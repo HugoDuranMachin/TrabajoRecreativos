@@ -23,6 +23,8 @@ public class MenuOpcionesPremios {
                 int indicePremioSeleccionado = (DriverMenu.seleccionDeItem(arrayPremios())-1);
                 Premio premioSeleccionado = Main.stockPremios.listaPremios.get(indicePremioSeleccionado);
                 menuModificarPremio(premioSeleccionado, indicePremioSeleccionado);
+            case '0':
+                DriverMenu.menu();
             default:
                 menu();
         }
@@ -38,18 +40,24 @@ public class MenuOpcionesPremios {
 
     static String nuevoNombreParaPremio() {
         System.out.println("¿Nombre para el premio?\n" +
-                "0 - Back\n");
-
+                "(0 - Back)");
         String buffer = Main.inputFull();
         if (buffer.charAt(0) == '0') {
             menu();
         }
         return buffer;
     }
+
     static int nuevoStockParaPremio() {
 
         System.out.println("¿Stock?\n" +
-                "No he hecho que esto mire si es un número o no! Ahora mismo no me importa!\n");
+                "No he hecho que esto mire si es un número o no! " +
+                "Ahora mismo no me importa!\n" +
+                "(0 - Back)");
+        String buffer = Main.inputFull();
+        if (buffer.charAt(0) == '0') {
+            menu();
+        }
 
         return Main.input() - 48;
 
@@ -57,7 +65,8 @@ public class MenuOpcionesPremios {
     static int nuevoPrecioParaPremio() {
 
         System.out.println("¿Precio?\n" +
-                "No he hecho que esto mire si es un número o no! Ahora mismo no me importa!\n");
+                "No he hecho que esto mire si es un número o no! " +
+                "Ahora mismo no me importa!\n");
 
         return Main.input() -48;
         }
@@ -67,9 +76,10 @@ public class MenuOpcionesPremios {
         System.out.println("Que desea hacer con " + p + "? (Se aplica a todas las instancias de este premio)");
 
         System.out.println("1 - Eliminar el premio (ROMPE TODAS LAS TERMINALES INICIALIZADAS)\n" +
-                "2 - Modificar el nombre del premio\n" +
-                "3 - Modificar los tickets necesarios para canjear\n" +
-                "4 - Modificar su stock\n" +
+                "2 - Ver informacion sobre el premio\n" +
+                "3 - Modificar el nombre del premio\n" +
+                "4 - Modificar los tickets necesarios para canjear\n" +
+                "5 - Modificar su stock\n" +
                 "0 - Back");
 
         DriverMenu.pointerToLastMenuAccessed = Main.input();
@@ -83,11 +93,19 @@ public class MenuOpcionesPremios {
                 Main.stockPremios.listaPremios.remove(index);
                 break;
             case '2':
-                p.setNombre(nuevoNombreParaPremio());
+                System.out.println(p.info());
+                menuModificarPremio(p, index);
+                break;
             case '3':
-                /*
-                TODO: I was about here, idk
-                 */
+                p.setNombre(nuevoNombreParaPremio());
+                menuModificarPremio(p, index);
+                break;
+            case '4':
+                p.setTicketsNecesarios(nuevoPrecioParaPremio());
+                menuModificarPremio(p, index);
+                break;
+            case '5':
+                p.setStock(nuevoStockParaPremio());
                 menuModificarPremio(p, index);
             default:
         }

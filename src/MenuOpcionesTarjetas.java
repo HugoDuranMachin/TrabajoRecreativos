@@ -6,6 +6,7 @@ public class MenuOpcionesTarjetas {
 
     public static void menu() {
 
+        System.out.println("Actualmente hay " + Main.mapaTarjetas.size() + " tarjetas cargadas");
         System.out.println("1 - Cargar tres tarjetas\n" +
                 "2 - Ver y Modificar Tarjetas\n" +
                 "0 - Back");
@@ -36,12 +37,16 @@ public class MenuOpcionesTarjetas {
                 Terminal.quitarTarjeta(selection);
                 DriverMenu.seleccionDeItem(arrayTarjetas());
             case '2':
-                System.out.println("Escriba el nuevo nombre");
-                Main.mapaTarjetas.get(selection).setNombrePropietario(Main.inputFull());
-                System.out.println("Informacion actualizada: " + Main.mapaTarjetas.get(selection));
-                DriverMenu.seleccionDeItem(arrayTarjetas());
+
+                nuevoNombreParaTarjeta(Main.mapaTarjetas.get(selection));
             default:
                 menu();
         }
+    }
+
+    public static void nuevoNombreParaTarjeta(Tarjeta t) {
+        System.out.println("Escriba el nuevo nombre");
+        t.setNombrePropietario(Main.inputFull());
+        System.out.println("Informacion actualizada: " + t);
     }
 }

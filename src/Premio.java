@@ -36,10 +36,14 @@ public class Premio {
         this.nombre = nombre;
     }
 
+    public void setTicketsNecesarios(int precio) {
+        this.ticketsNecesarios = precio;
+    }
+
     public String info() {
-        return "Premio: " + this.getNombre() +
-                " - Stock: " + this.getStock() +
-                " - Precio: " + this.getTicketsNecesarios();
+        return "Nombre: " + this.getNombre() +
+                ", Stock: " + this.getStock() +
+                ", Precio: " + this.getTicketsNecesarios();
     }
 
     @Override

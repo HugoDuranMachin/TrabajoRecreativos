@@ -10,14 +10,14 @@ public class MenuEditarPremiosEnTerminal {
         premioSelected = p;
         indexPremio = iPremio;
         indexTerminal = iTerminal;
-        System.out.println("Que desea hacer con " + p + "Con relacion a " + t);
+        System.out.println("La terminal es de index " + indexTerminal);
+        System.out.println("Que desea hacer con " + p + " con relacion a " + t);
 
         System.out.println("1 - Eliminar el premio DE LA TERMINAL\n" +
                 "2 - Modificar los atributos del premio (GLOBAL)\n" +
                 "0 - Back");
 
-        DriverMenu.pointerToLastMenuAccessed = Main.input();
-        switchForMenu(DriverMenu.pointerToLastMenuAccessed);
+        switchForMenu(Main.input());
     }
 
     public static void switchForMenu(int selection) {
@@ -25,10 +25,12 @@ public class MenuEditarPremiosEnTerminal {
         switch (selection) {
             case '1':
                 terminalSelected.premiosEnTerminal.remove(indexPremio);
+                MenuOpcionesTerminales.modificarTerminal(indexTerminal);
+                break;
             case '2':
-                System.out.println("menu de modificacion de un premio de la terminal");
                 MenuOpcionesPremios.menuModificarPremio(premioSelected, indexPremio);
                 switchForMenu(selection);
+                break;
             default:
                 MenuOpcionesTerminales.modificarTerminal(Main.listaTerminales.indexOf(terminalSelected));
         }

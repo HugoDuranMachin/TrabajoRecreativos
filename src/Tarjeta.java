@@ -1,19 +1,20 @@
 
 public class Tarjeta {
 
-    private int saldoCreditos;
-    private int saldoTickets;
-    private String nombrePropietario;
+    private int saldoCreditos = 0;
+    private int saldoTickets = 0;
+    private String nombrePropietario = "Empty";
     private final int uniqueID;
 
     Tarjeta(int UID) {
         this.uniqueID = UID;
     }
 
-    Tarjeta(int UID, String nombrePropietario) {
-
+    Tarjeta(int UID, String nombre, int tickets, int creditos) {
         this.uniqueID = UID;
-        this.nombrePropietario = nombrePropietario;
+        this.nombrePropietario = nombre;
+        this.saldoTickets = tickets;
+        this.saldoCreditos = creditos;
     }
 
     public int getSaldoCreditos() {

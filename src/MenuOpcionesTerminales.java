@@ -1,14 +1,10 @@
-import java.sql.Driver;
-
 public class MenuOpcionesTerminales {
-
 
     static Object[] arrayTerminales(){
         return Main.listaTerminales.toArray();
     }
 
     public static void menu() {
-
         System.out.println("Actualmente hay " + Main.listaTerminales.size() + " Terminales");
         System.out.println("1 - Cargar dos terminales\n" +
                 "2 - Ver y Modificar Terminales\n" +
@@ -27,13 +23,8 @@ public class MenuOpcionesTerminales {
         }
     }
 
-    public static void modificarTerminal(int input) {
-
-        int currentPageIndexZero = DriverMenu.currentPage-1;
-        input = input - 1 - currentPageIndexZero;
-        input = currentPageIndexZero * 7 + input;
-        System.out.println(input);
-        Terminal terminalSeleccionada = Main.listaTerminales.get(input);
+    public static void modificarTerminal(int indexTerminal) {
+        Terminal terminalSeleccionada = Main.listaTerminales.get(indexTerminal);
         Object[] premiosDeTerminalT = terminalSeleccionada.premiosEnTerminal.toArray();
         int indexDePremioSeleccionado;
 
@@ -45,17 +36,19 @@ public class MenuOpcionesTerminales {
 
         switch (Main.input()) {
             case '1':
-                Main.listaTerminales.remove(input);
+                Main.listaTerminales.remove(indexTerminal);
                 DriverMenu.verPagina(arrayTerminales(), 1);
+                break;
             case '2':
-                indexDePremioSeleccionado = (DriverMenu.seleccionDeItem(premiosDeTerminalT)) -1;
+                indexDePremioSeleccionado = (DriverMenu.seleccionDeItem(premiosDeTerminalT));
                 Premio premioSeleccionado = terminalSeleccionada.premiosEnTerminal.get(indexDePremioSeleccionado);
                 MenuEditarPremiosEnTerminal.menu(
                         premioSeleccionado,
                         terminalSeleccionada,
-                        input,
-                        indexDePremioSeleccionado
+                        indexDePremioSeleccionado,
+                        indexTerminal
                 );
+                break;
             default:
                 menu();
         }

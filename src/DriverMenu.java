@@ -1,13 +1,15 @@
 public class DriverMenu {
 
     static char pointerToLastMenuAccessed = 0;
+    public static int currentPage = 1;
+
 
     public static void menu() {
         System.out.println("1 - Cargar valores por defecto (Sobreescribe)\n" +
                            "2 - Modificar stock de premios\n" +
                            "3 - Modificar terminales\n" +
                            "4 - Modificar tarjetas (usuarios)\n" +
-                           "5 - Iniciar Recreativas!\n" +
+                           "5 - Iniciar Recreativas! (wip)\n" +
                            "0 - Exit");
 
         pointerToLastMenuAccessed = Main.input();
@@ -28,13 +30,16 @@ public class DriverMenu {
             case '4':
                 MenuOpcionesTarjetas.menu();
                 break;
+            case '5':
+                MenuRecreativas.menu();
+                break;
             case '0': default:
                 return;
         }
         menu();
     }
 
-    public static int currentPage = 1;
+    static int output;
 
     public static int seleccionDeItem(Object[] obj) {
         verPagina(obj, currentPage);
@@ -42,7 +47,9 @@ public class DriverMenu {
         switch (selection) {
             case '1': case '2': case '3': case '4':
             case '5': case '6': case '7':
-                return selection-48;
+                output = ((selection-49) + ((currentPage-1)*7)); //char to int and then base 0d
+                currentPage = 1;
+                break;
             case '8':
                 currentPage = currentPage-1;
                 seleccionDeItem(obj);
@@ -52,11 +59,14 @@ public class DriverMenu {
                 seleccionDeItem(obj);
                 break;
             case '0': default:
+                currentPage = 1;
                 optionsForMenu(pointerToLastMenuAccessed);
                 break;
         }
-        return 0;
+        return output;
     }
+
+
 
     public static void verPagina(Object[] obj, int pagina) {
         int lastPage = (obj.length/7) + 1;

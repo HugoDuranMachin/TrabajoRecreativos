@@ -25,17 +25,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
-        loadDefaults();
-
-        //remove at some point
-        for (int i = 0; i < 18; i++) {
-            addTerminal();
-            Terminal.nuevaTarjeta();
-        }
-        DriverMenu.seleccionDeItem(MenuOpcionesTerminales.arrayTerminales());
-
-
+        DriverMenu.menu();
     }
 
     public static void loadDefaults() {

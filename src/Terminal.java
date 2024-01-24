@@ -16,6 +16,10 @@ public class Terminal {
     }
 
     static Premio premioAleatorioDeStock(StockPremios sp) {
+        if (sp.listaPremios.isEmpty()) {
+            System.out.println("No hay premios que cargar en terminales! ERROR!");
+            DriverMenu.menu();
+        }
         return sp.listaPremios.get(Main.randomInt(sp.listaPremios.size()));
     }
 
@@ -83,11 +87,7 @@ public class Terminal {
         Main.UID++;
     }
 
-    public static void nuevaTarjeta(String nombre) {
-        Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID, nombre));
-        Main.UID++;
-    }
-
+    //TODO: THIS DOESN'T CHECK IF IT EXISTS!
     public static void quitarTarjeta(int UID) {
         Main.mapaTarjetas.remove(UID);
     }
