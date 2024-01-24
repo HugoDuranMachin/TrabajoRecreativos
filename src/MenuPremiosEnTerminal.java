@@ -1,4 +1,4 @@
-public class MenuEditarPremiosEnTerminal {
+public class MenuPremiosEnTerminal {
 
     static Terminal terminalSelected;
     static Premio premioSelected;

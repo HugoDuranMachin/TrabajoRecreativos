@@ -42,7 +42,7 @@ public class MenuOpcionesTerminales {
             case '2':
                 indexDePremioSeleccionado = (DriverMenu.seleccionDeItem(premiosDeTerminalT));
                 Premio premioSeleccionado = terminalSeleccionada.premiosEnTerminal.get(indexDePremioSeleccionado);
-                MenuEditarPremiosEnTerminal.menu(
+                MenuPremiosEnTerminal.menu(
                         premioSeleccionado,
                         terminalSeleccionada,
                         indexDePremioSeleccionado,

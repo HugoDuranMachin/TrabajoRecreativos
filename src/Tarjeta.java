@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Tarjeta {
 
@@ -5,15 +6,16 @@ public class Tarjeta {
     private int saldoTickets = 0;
     private String nombrePropietario = "Empty";
     private final int uniqueID;
+    private ArrayList<Premio> premiosObtenidos = new ArrayList<>();
 
     Tarjeta(int UID) {
         this.uniqueID = UID;
     }
 
-    Tarjeta(int UID, String nombre, int tickets) {
+    Tarjeta(int UID, String nombre, int creditos) {
         this.uniqueID = UID;
         this.nombrePropietario = nombre;
-        this.saldoTickets = tickets;
+        this.saldoCreditos = creditos;
     }
 
     public int getSaldoCreditos() {
@@ -47,7 +49,8 @@ public class Tarjeta {
     public String info() {
         return "Saldo Tickets: " + getSaldoTickets()
                 + "\nSaldo Créditos: " + getSaldoCreditos()
-                + "\nNúmero de Tarjeta: " + getUID();
+                + "\nNúmero de Tarjeta: " + getUID()
+                + "\nPremios obtenidos: " + premiosObtenidos;
     }
 
     @Override

@@ -14,7 +14,7 @@ public class Juego {
         int tickets = Main.randomInt(1000);
         if(t.getSaldoCreditos()>j.getCreditosNecesarios()) {
             t.setSaldoCreditos(t.getSaldoCreditos()-j.getCreditosNecesarios());
-            t.setSaldoTickets(tickets);
+            t.setSaldoTickets(tickets + t.getSaldoTickets());
             respuesta = "Numero tarjeta: " + t.getUID() + "\nTickets ganados: " + tickets + "\nTickets totales: " + t.getSaldoTickets();
         }
         return respuesta;
