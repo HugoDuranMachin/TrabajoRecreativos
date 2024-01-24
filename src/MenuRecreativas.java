@@ -1,30 +1,16 @@
 public class MenuRecreativas {
 
-    /*
-TODO:
-    Cargar creditos en cada tarjeta (Crear una opcion en el menu driver que cargue creditos)
-    Jugar a "varios juegos"
-    Transferir Creditos y Tickets
-    Intentar jugar y solicitar un premio con la tarjeta 1
-*/
     static Tarjeta selectedPlayer;
     static Terminal selectedTerminal;
+
     public static void menu() {
 
-        /*
-        TODO:
-            al iniciar, elegir una tarjeta con la que jugar
-            submenu:
-                jugar con la tarjeta
-                canjear un premio con la tarjeta
-                intercambiar creditos y tickets con la tarjeta
-                guardar el premio recibido en la tarjeta
-         */
-
+        String terminal = (selectedTerminal == null) ? "No hay terminal seleccionada" : selectedTerminal.toString();
         System.out.println("1 - Elegir Tarjeta con la que jugar\n" +
-                    "2 - Jugar a un juego\n" +
-                    "3 - Interactuar con una terminal\n" +
-                    "0 - Exit");
+                "2 - Jugar a un juego\n" +
+                "3 - Interactuar con la terminal seleccionada\n" +
+                "4 - Cambiar la terminal actual (" + terminal + ")\n" +
+                "0 - Exit");
 
         optionsForMenu(Main.input());
     }
@@ -32,7 +18,8 @@ TODO:
     public static void optionsForMenu(int selection) {
         switch (selection) {
             case '1':
-                selectPlayer();
+                selectedPlayer = selectPlayer();
+                menu();
                 break;
             case '2':
                 if (selectedPlayer == null) {
@@ -43,9 +30,13 @@ TODO:
                 break;
             case '3':
                 if (selectedTerminal == null) {
+                    System.out.println("No hay una terminal seleccionada, por favor elige una terminal");
                     selectTerminal();
-                    menu();
                 }
+                menuTerminal(selectedTerminal);
+                break;
+            case '4':
+                selectTerminal();
                 menuTerminal(selectedTerminal);
             default:
                 DriverMenu.menu();
@@ -53,16 +44,16 @@ TODO:
 
     }
 
-    public static void selectPlayer() {
+    public static Tarjeta selectPlayer() {
         System.out.println("Elige una tarjeta: ");
-        selectedPlayer = Main.mapaTarjetas.get(DriverMenu.seleccionDeItem(MenuOpcionesTarjetas.arrayTarjetas()));
-        System.out.println("Estás jugando como: " + selectedPlayer.getNombrePropietario());
-        menu();
+        Tarjeta t = Main.mapaTarjetas.get(DriverMenu.seleccionDeItem(MenuOpcionesTarjetas.arrayTarjetas()));
+        System.out.println("Has seleccionado: " + t.getNombrePropietario());
+        return t;
     }
 
     public static void playGame() {
         Juego j = new Juego("Cambio De Divisa", Main.randomInt(100));
-        System.out.println("No han habido fuerzas de crear juegos!\n"+
+        System.out.println("No han habido fuerzas de crear juegos!\n" +
                 "A cambio, mete créditos y recibe monedas!\n" +
                 "Este juego cuesta: " + j.getCreditosNecesarios() + " creditos\n" +
                 "Tienes: " + selectedPlayer.getSaldoCreditos() + " creditos\n" +
@@ -78,7 +69,6 @@ TODO:
         System.out.println("Elige una terminal: ");
         selectedTerminal = Main.listaTerminales.get(DriverMenu.seleccionDeItem(MenuOpcionesTerminales.arrayTerminales()));
         System.out.println("Has seleccionado la terminal: " + selectedTerminal);
-        menu();
     }
 
     public static void menuTerminal(Terminal t) {
@@ -87,8 +77,9 @@ TODO:
 
         System.out.println("1 - Seleccionar un premio\n" +
                 "2 - Ver información de mi tarjeta\n" +
-                "3 - Intercambiar Tickets con otra tarjeta\n" +
-                "4 - Intercambiar Creditos con otra tarjeta\n" +
+                "3 - Recargar Creditos\n" +
+                "4 - Intercambiar Tickets con otra tarjeta\n" +
+                "5 - Intercambiar Creditos con otra tarjeta\n" +
                 "0 - Exit");
 
         optionsForTerminal(t, Main.input());
@@ -97,47 +88,47 @@ TODO:
     public static void optionsForTerminal(Terminal t, int selection) {
         switch (selection) {
             case '1':
-                seleccionarPremioDeTerminal(t);
+                selectedTerminal.seleccionarPremioDeTerminal(selectedPlayer);
                 break;
             case '2':
                 System.out.println(selectedPlayer.info());
                 break;
             case '3':
-                //menuIntercambiarTickets();
+                selectedTerminal.menuRecargarCreditos(selectedPlayer);
                 break;
             case '4':
-                //menuIntercambiarCreditos();
+                selectedTerminal.transferirTickets(selectedPlayer, targetUser(), inputInt());
+                break;
+            case '5':
+                selectedTerminal.transferirCreditos(selectedPlayer, targetUser(), inputInt());
                 break;
             default:
+                menu();
                 break;
         }
-        menu();
+        menuTerminal(t);
     }
 
-    public static void seleccionarPremioDeTerminal(Terminal t) {
-        System.out.println("Qué premio quieres elegir?");
-        Premio premioSelected = t.premiosEnTerminal.get(DriverMenu.seleccionDeItem(t.premiosEnTerminal.toArray()));
-        System.out.println("Premio elegido: " + premioSelected);
-        System.out.println("Precio: " + premioSelected.getTicketsNecesarios());
-        System.out.println("Tickets disponibles: " + selectedPlayer.getSaldoTickets());
-        System.out.println("1: Comprar\n" +
-                "0: Exit");
-
-        if (Main.input() == '1') {
-            confirmarCompra(premioSelected);
-        };
-
-        menu();
-
-    }
-
-    public static void confirmarCompra(Premio p) {
-
-        if (p.getTicketsNecesarios() > selectedPlayer.getSaldoTickets()) {
-            System.out.println("No tienes los tickets necesarios");
-            return;
+    public static Tarjeta targetUser() {
+        System.out.println("Elige una segunda tarjeta recipiente: ");
+        Tarjeta t2 = selectPlayer();
+        if (t2 == selectedPlayer) {
+            System.out.println("Silly, that's you!");
+            menuTerminal(selectedTerminal);
         }
+        return t2;
+    }
+
+    public static int inputInt() {
+        System.out.println("Dame una cantidad: ");
+        try {
+            return Integer.parseInt(Main.inputFull());
+        } catch (Exception ignored) {
+            System.out.println("No has metido un numero");
+            menuTerminal(selectedTerminal);
+        }
+        return 0;
+    }
+}
 
 
-
-    }}

@@ -24,33 +24,52 @@ public class Terminal {
         return sp.listaPremios.get(Main.randomInt(sp.listaPremios.size()));
     }
 
-    public void getPremiosDeTerm() {
-        for (Premio p : premiosEnTerminal) {
-            System.out.println(p);
+    public void menuRecargarCreditos(Tarjeta t) {
+        System.out.println("Cuanto dinero quieres meter?");
+        int dineroMetido;
+        try {
+            dineroMetido = Integer.parseInt(Main.inputFull());
+        } catch (Exception ignored) {
+            System.out.println("No has metido un numero");
+            menuRecargarCreditos(t);
+            return;
         }
+
+        System.out.println("Tenias " + t.getSaldoCreditos() + " creditos");
+        recargarCreditos(t, dineroMetido);
+        System.out.println("Has metido " + dineroMetido + " Dineros");
+        System.out.println("Tienes " + t.getSaldoCreditos() + " creditos");
     }
 
-    public void canjearPremio(int index) {
+    public boolean disponibilidadCreditos(Tarjeta t, int cantidad) {
+        return !(cantidad > t.getSaldoCreditos());
+    }
 
-        premiosEnTerminal.get(index).setStock(premiosEnTerminal.get(index).getStock() - 1);
+    public boolean disponibilidadTickets(Tarjeta t, int cantidad) {
+        return !(cantidad > t.getSaldoTickets());
     }
 
     public void transferirTickets(Tarjeta t1, Tarjeta t2, int cantidad) {
-        if (cantidad > t1.getSaldoCreditos()) {
-            System.out.println("No dispone de tickets suficientes");
-        } else {
-            t1.setSaldoTickets(t1.getSaldoTickets() - cantidad);
-            t2.setSaldoTickets(t2.getSaldoTickets() + cantidad);
+        if (!disponibilidadTickets(t1, cantidad)) {
+            System.out.println("No tienes tickets suficientes en " + t1.getNombrePropietario());
+            return;
         }
+        t1.setSaldoTickets(t1.getSaldoTickets() - cantidad);
+        t2.setSaldoTickets(t2.getSaldoTickets() + cantidad);
+        System.out.println("Nuevo saldo para " + t1.getNombrePropietario() + ": " + t1.getSaldoTickets());
+        System.out.println("Nuevo saldo para " + t2.getNombrePropietario() + ": " + t2.getSaldoTickets());
+
     }
 
     public void transferirCreditos(Tarjeta t1, Tarjeta t2, int cantidad) {
-        if (cantidad > t1.getSaldoCreditos()) {
-            System.out.println("No dispone de créditos suficientes");
-        } else {
-            t1.setSaldoCreditos(t1.getSaldoCreditos() - cantidad);
-            t2.setSaldoCreditos(t2.getSaldoCreditos() + cantidad);
+        if (!disponibilidadCreditos(t1, cantidad)) {
+            System.out.println("No tienes creditos suficientes en " + t1.getNombrePropietario());
+            return;
         }
+        t1.setSaldoCreditos(t1.getSaldoCreditos() - cantidad);
+        t2.setSaldoCreditos(t2.getSaldoCreditos() + cantidad);
+        System.out.println("Nuevo saldo para " + t1.getNombrePropietario() + ": " + t1.getSaldoCreditos());
+        System.out.println("Nuevo saldo para " + t2.getNombrePropietario() + ": " + t2.getSaldoCreditos());
     }
 
     public void recargarCreditos(Tarjeta t, int cantidad) {
@@ -58,18 +77,38 @@ public class Terminal {
         t.setSaldoCreditos(t.getSaldoCreditos() + cantidad);
     }
 
-    public String consultarSaldo(Tarjeta t) {
-        return t.info();
+    public void seleccionarPremioDeTerminal(Tarjeta t) {
+        System.out.println("Qué premio quieres elegir?");
+        Premio premioSelected = premiosEnTerminal.get(DriverMenu.seleccionDeItem(premiosEnTerminal.toArray()));
+        System.out.println("Premio elegido: " + premioSelected);
+        System.out.println("Precio: " + premioSelected.getTicketsNecesarios());
+        System.out.println("Tickets disponibles: " + t.getSaldoTickets());
+        System.out.println("1: Comprar\n" +
+                "0: Exit");
+
+        if (Main.input() == '1') {
+            canjearPremio(t, premioSelected, 1);
+        }
     }
 
-    public String canjearPremios(Tarjeta t, Premio p, int cantidad) {
-        String respuesta = "Error";
-        if (t.getSaldoTickets() >= (p.getTicketsNecesarios() * cantidad) || cantidad >= p.getStock()) {
-            t.setSaldoTickets(t.getSaldoTickets() - (p.getTicketsNecesarios() * cantidad));
-            p.setStock(p.getStock() - cantidad);
-            respuesta = "Operación correcta.\nQuedan " + p.getStock() + " premios";
+    public void canjearPremio(Tarjeta t, Premio p, int cantidad) {
+        System.out.println("Balance de Tickets actual: " + t.getSaldoTickets());
+        int totalPrecio = p.getTicketsNecesarios()*cantidad;
+        if (disponibilidadTickets(t, totalPrecio)) {
+            System.out.println("No tienes los tickets necesarios");
+            return;
         }
-        return respuesta;
+
+        if (p.getStock() <= 0) {
+            System.out.println("No queda stock!");
+            return;
+        }
+
+        t.setSaldoTickets(t.getSaldoTickets() - totalPrecio);
+        t.addPremio(p);
+        p.setStock(p.getStock() - cantidad);
+        System.out.println("Premio obtenido: " + p);
+        System.out.println("Nuevo balance: " + t.getSaldoTickets());
     }
 
     /*

@@ -46,6 +46,12 @@ public class Tarjeta {
         this.nombrePropietario = nombrePropietario;
     }
 
+    public void addPremio(Premio p) {
+        //lazy
+        this.premiosObtenidos.add(p);
+    }
+
+    //Ideally this should be in the terminal, but I'm tired
     public String info() {
         return "Saldo Tickets: " + getSaldoTickets()
                 + "\nSaldo Créditos: " + getSaldoCreditos()
