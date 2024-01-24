@@ -10,7 +10,6 @@ public class MenuEditarPremiosEnTerminal {
         premioSelected = p;
         indexPremio = iPremio;
         indexTerminal = iTerminal;
-        System.out.println("La terminal es de index " + indexTerminal);
         System.out.println("Que desea hacer con " + p + " con relacion a " + t);
 
         System.out.println("1 - Eliminar el premio DE LA TERMINAL\n" +
