@@ -132,6 +132,7 @@ public class Terminal extends Main {
         mapaTarjetas.remove(UID);
     }
 
+    //TODO: THIS BITCH EMPTY
     public static void quitarTarjeta(Tarjeta t) {
 
     }
