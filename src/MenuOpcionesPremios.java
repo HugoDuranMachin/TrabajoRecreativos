@@ -1,43 +1,43 @@
-public class MenuOpcionesPremios {
-    static Object[] arrayPremios() {
-        return Main.stockPremios.listaPremios.toArray();
-    }
-
+public abstract class MenuOpcionesPremios extends DriverMenu {
     public static void menu() {
 
-        System.out.println("Actualmente hay " + Main.stockPremios.listaPremios.size() + " premios");
+        resetStaticVariables();
+        System.out.println("Actualmente hay " + stockPremios.listaPremios.size() + " premios");
         System.out.println("1 - Cargar premios por defecto (Sobreescribe)\n" +
                 "2 - Añadir un premio\n" +
                 "3 - Ver y Modificar premios\n" +
                 "0 - Back");
 
-        switchForMenu(Main.input());
+        switchForMenu(input());
     }
 
     public static void switchForMenu(char selection) {
 
         switch (selection) {
             case '1':
-                Main.stockPremios = new StockPremios(1);
+                stockPremios = new StockPremios(1);
                 menu();
+                break;
             case '2':
                 menuAddPremio();
-            case '3':
-                int indicePremioSeleccionado = (DriverMenu.seleccionDeItem(arrayPremios()) - 1);
-                Premio premioSeleccionado = Main.stockPremios.listaPremios.get(indicePremioSeleccionado);
-                menuModificarPremio(premioSeleccionado, indicePremioSeleccionado);
-            case '0':
-                DriverMenu.menu();
-            default:
                 menu();
+                break;
+            case '3':
+                selectPremioSaveVariables();
+                menuModificarPremio(selectedPremio, indexPremioSelected);
+                resetStaticVariables();
+                break;
+            default:
+                DriverMenu.menu();
+                break;
         }
     }
 
+    //TODO: Maybe this should go inside the terminal?
     public static void menuAddPremio() {
         String nombrePremioNuevo = nuevoNombreParaPremio();
-        Main.stockPremios.addPremio(nuevoNombreParaPremio(), nuevoStockParaPremio(), nuevoPrecioParaPremio());
+        stockPremios.addPremio(nombrePremioNuevo, nuevoStockParaPremio(), nuevoPrecioParaPremio());
         System.out.println("Premio añadido: " + nombrePremioNuevo);
-        menu();
     }
 
     static String nuevoNombreParaPremio() {
@@ -61,7 +61,7 @@ public class MenuOpcionesPremios {
             menu();
         }
 
-        return Main.input() - 48;
+        return Integer.parseInt(buffer);
 
     }
 
@@ -70,11 +70,14 @@ public class MenuOpcionesPremios {
         System.out.println("¿Precio?\n" +
                 "No he hecho que esto mire si es un número o no! " +
                 "Ahora mismo no me importa!\n");
-
-        return Main.input() - 48;
+        String buffer = Main.inputFull();
+        if (buffer.charAt(0) == '0') {
+            menu();
+        }
+        return Integer.parseInt(buffer);
     }
 
-    public static void menuModificarPremio(Premio p, int index) {
+    static void menuModificarPremio(Premio p, int index) {
 
         System.out.println("Que desea hacer con " + p + "? (Se aplica a todas las instancias de este premio)");
 
@@ -85,15 +88,16 @@ public class MenuOpcionesPremios {
                 "5 - Modificar su stock\n" +
                 "0 - Back");
 
-        DriverMenu.pointerToLastMenuAccessed = Main.input();
-        switchForMenuModificarPremio(DriverMenu.pointerToLastMenuAccessed, p, index);
+        pointerToLastMenuAccessed = input();
+        switchForMenuModificarPremio(pointerToLastMenuAccessed, p, index);
     }
 
-    public static void switchForMenuModificarPremio(char selection, Premio p, int index) {
+    //TODO: pretty sure this can take no variables
+     static void switchForMenuModificarPremio(char selection, Premio p, int index) {
 
         switch (selection) {
             case '1':
-                Main.stockPremios.listaPremios.remove(index);
+                stockPremios.listaPremios.remove(index);
                 break;
             case '2':
                 System.out.println(p.info());
@@ -115,6 +119,4 @@ public class MenuOpcionesPremios {
         menu();
 
     }
-
-    //STOP
 }

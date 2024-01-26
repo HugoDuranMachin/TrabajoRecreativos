@@ -1,4 +1,4 @@
-public class Premio {
+public class Premio extends Main {
 
     private String nombre;
     private int ticketsNecesarios;
@@ -12,8 +12,8 @@ public class Premio {
 
     public Premio(String nombre) {
         this.nombre = nombre;
-        this.ticketsNecesarios = Main.randomInt(200);
-        this.stock = Main.randomInt(19) + 1;
+        this.ticketsNecesarios = randomInt(200);
+        this.stock = randomInt(19) + 1;
     }
 
     public String getNombre() {

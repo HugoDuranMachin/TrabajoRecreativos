@@ -1,9 +1,7 @@
-public class MenuRecreativas {
+public class MenuRecreativas  extends DriverMenu {
 
-    static Tarjeta selectedPlayer;
-    static Terminal selectedTerminal;
 
-    public static void menu() {
+    static void menu() {
 
         String terminal = (selectedTerminal == null) ? "No hay terminal seleccionada" : selectedTerminal.toString();
         System.out.println("1 - Elegir Tarjeta con la que jugar\n" +
@@ -12,10 +10,10 @@ public class MenuRecreativas {
                 "4 - Cambiar la terminal actual (" + terminal + ")\n" +
                 "0 - Exit");
 
-        optionsForMenu(Main.input());
+        optionsForMenu(input());
     }
 
-    public static void optionsForMenu(int selection) {
+    static void optionsForMenu(int selection) {
         switch (selection) {
             case '1':
                 selectedPlayer = selectPlayer();
@@ -46,9 +44,9 @@ public class MenuRecreativas {
 
     public static Tarjeta selectPlayer() {
         System.out.println("Elige una tarjeta: ");
-        Tarjeta t = Main.mapaTarjetas.get(DriverMenu.seleccionDeItem(MenuOpcionesTarjetas.arrayTarjetas()));
-        System.out.println("Has seleccionado: " + t.getNombrePropietario());
-        return t;
+        selectPlayerSaveVariables();
+        System.out.println("Has seleccionado: " + selectedPlayer.getNombrePropietario());
+        return selectedPlayer;
     }
 
     public static void playGame() {
@@ -67,7 +65,7 @@ public class MenuRecreativas {
 
     public static void selectTerminal() {
         System.out.println("Elige una terminal: ");
-        selectedTerminal = Main.listaTerminales.get(DriverMenu.seleccionDeItem(MenuOpcionesTerminales.arrayTerminales()));
+        selectedTerminal = listaTerminales.get(seleccionDeItem(arrayTerminales()));
         System.out.println("Has seleccionado la terminal: " + selectedTerminal);
     }
 

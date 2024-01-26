@@ -1,24 +1,24 @@
-public class DriverMenu {
+public abstract class DriverMenu extends Main{
 
     static char pointerToLastMenuAccessed = 0;
     public static int currentPage = 1;
 
-    public static void menu() {
+     static void menu() {
         System.out.println("1 - Cargar valores por defecto (Sobreescribe)\n" +
                 "2 - Modificar stock de premios\n" +
                 "3 - Modificar terminales\n" +
                 "4 - Modificar tarjetas (usuarios)\n" +
-                "5 - Iniciar Recreativas! (wip)\n" +
+                "5 - Iniciar Recreativas!\n" +
                 "0 - Exit");
 
-        pointerToLastMenuAccessed = Main.input();
+        pointerToLastMenuAccessed = input();
         optionsForMenu(pointerToLastMenuAccessed);
     }
 
     static void optionsForMenu(int selection) {
         switch (selection) {
             case '1':
-                Main.loadDefaults();
+                loadDefaults();
                 menu();
             case '2':
                 MenuOpcionesPremios.menu();
@@ -43,7 +43,7 @@ public class DriverMenu {
 
     public static int seleccionDeItem(Object[] obj) {
         verPagina(obj, currentPage);
-        char selection = Main.input();
+        char selection = input();
         switch (selection) {
             case '1':
             case '2':
@@ -109,6 +109,27 @@ public class DriverMenu {
                 "9: Pagina Siguiente\n" +
                 "0: Exit Menu");
     }
+    static void selectPremioSaveVariables() {
+        indexPremioSelected = seleccionDeItem(arrayPremios());
+        selectedPremio = stockPremios.listaPremios.get(indexPremioSelected);
+    }
+
+    //TODO: Just this?
+    static void selectPremioFromTerminalSaveVariables(Terminal t) {
+        indexPremioSelected = seleccionDeItem(arrayPremiosEnTerminal(t));
+        selectedPremio = t.premiosEnTerminal.get(indexPremioSelected);
+    }
+
+    static void selectTerminalSaveVariables() {
+        indexTerminalSelected = seleccionDeItem(arrayTerminales());
+        selectedTerminal = listaTerminales.get(indexTerminalSelected);
+    }
+
+    static void selectPlayerSaveVariables() {
+        indexPlayerSelected = seleccionDeItem(arrayTarjetas());
+        selectedPlayer = mapaTarjetas.get(indexPlayerSelected);
+    }
+
 }
 
 

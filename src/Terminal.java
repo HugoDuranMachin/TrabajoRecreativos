@@ -1,33 +1,33 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Terminal {
+public class Terminal extends Main {
 
     ArrayList<Premio> premiosEnTerminal;
 
-    Terminal(int entries, StockPremios sp) {
+    Terminal(int entries, StockPremios stockPremios) {
 
         this.premiosEnTerminal = new ArrayList<>();
 
         for (int i = 0; i < entries; i++) {
-            premiosEnTerminal.add(premioAleatorioDeStock(sp));
+            premiosEnTerminal.add(premioAleatorioDeStock(stockPremios));
         }
 
     }
 
-    static Premio premioAleatorioDeStock(StockPremios sp) {
-        if (sp.listaPremios.isEmpty()) {
+    static Premio premioAleatorioDeStock(StockPremios stockPremios) {
+        if (stockPremios.listaPremios.isEmpty()) {
             System.out.println("No hay premios que cargar en terminales! ERROR!");
             DriverMenu.menu();
         }
-        return sp.listaPremios.get(Main.randomInt(sp.listaPremios.size()));
+        return stockPremios.listaPremios.get(randomInt(stockPremios.listaPremios.size()));
     }
 
     public void menuRecargarCreditos(Tarjeta t) {
         System.out.println("Cuanto dinero quieres meter?");
         int dineroMetido;
         try {
-            dineroMetido = Integer.parseInt(Main.inputFull());
+            dineroMetido = Integer.parseInt(inputFull());
         } catch (Exception ignored) {
             System.out.println("No has metido un numero");
             menuRecargarCreditos(t);
@@ -85,7 +85,7 @@ public class Terminal {
         System.out.println("1: Comprar\n" +
                 "0: Exit");
 
-        if (Main.input() == '1') {
+        if (input() == '1') {
             canjearPremio(t, premioSelected, 1);
         }
     }
@@ -114,22 +114,26 @@ public class Terminal {
     BLOQUE DE MANIPULACION DE TARJETAS
      */
     public static void printInfoParaUID(int UID) {
-        System.out.println(Main.mapaTarjetas.get(UID));
+        System.out.println(mapaTarjetas.get(UID));
     }
 
     public static void nuevaTarjeta() {
-        Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID));
-        Main.UID++;
+        mapaTarjetas.put(UID, new Tarjeta(UID));
+        UID++;
     }
 
     public static void nuevaTarjeta(String nombre, int creditos) {
-        Main.mapaTarjetas.put(Main.UID, new Tarjeta(Main.UID, nombre, creditos));
-        Main.UID++;
+        mapaTarjetas.put(UID, new Tarjeta(UID, nombre, creditos));
+        UID++;
     }
 
     //TODO: THIS DOESN'T CHECK IF IT EXISTS!
     public static void quitarTarjeta(int UID) {
-        Main.mapaTarjetas.remove(UID);
+        mapaTarjetas.remove(UID);
+    }
+
+    public static void quitarTarjeta(Tarjeta t) {
+
     }
 
     @Override

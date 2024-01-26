@@ -1,38 +1,37 @@
-public class MenuPremiosEnTerminal {
+import java.util.ArrayList;
 
-    static Terminal terminalSelected;
-    static Premio premioSelected;
-    static int indexPremio;
-    static int indexTerminal;
-    public static void menu(Premio p, Terminal t, int iPremio, int iTerminal) {
+public class MenuPremiosEnTerminal extends MenuOpcionesTerminales {
 
-        terminalSelected = t;
-        premioSelected = p;
-        indexPremio = iPremio;
-        indexTerminal = iTerminal;
-        System.out.println("Que desea hacer con " + p + " con relacion a " + t);
+    public static void menu(int indexPremioSeleccionado, Premio selectedPremio) {
+
+        Object[] premiosForT = arrayPremiosEnTerminal(selectedTerminal);
+
+        System.out.println("Que desea hacer con " + selectedPremio + " con relacion a " + selectedTerminal);
 
         System.out.println("1 - Eliminar el premio DE LA TERMINAL\n" +
                 "2 - Modificar los atributos del premio (GLOBAL)\n" +
                 "0 - Back");
 
-        switchForMenu(Main.input());
+        switchForMenu(input(), selectedTerminal.premiosEnTerminal);
     }
 
-    public static void switchForMenu(int selection) {
-
+    public static void switchForMenu(int selection, ArrayList<Premio> premiosEnTerminal) {
+        
         switch (selection) {
             case '1':
-                terminalSelected.premiosEnTerminal.remove(indexPremio);
-                MenuOpcionesTerminales.modificarTerminal(indexTerminal);
+                premiosEnTerminal.remove(indexPremioSelected);
+                modificarTerminal(selectedTerminal);
                 break;
             case '2':
-                MenuOpcionesPremios.menuModificarPremio(premioSelected, indexPremio);
-                switchForMenu(selection);
+                MenuOpcionesPremios.menuModificarPremio(selectedPremio, indexPremioSelected);
+                switchForMenu(selection, premiosEnTerminal);
                 break;
             default:
-                MenuOpcionesTerminales.modificarTerminal(Main.listaTerminales.indexOf(terminalSelected));
-        }
+                resetStaticVariables();
+                break;}
+
+        modificarTerminal(selectedTerminal);
+
     }
 
 

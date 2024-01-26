@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-
-public class Tarjeta {
+public class Tarjeta extends Main {
 
     private int saldoCreditos = 0;
     private int saldoTickets = 0;
