@@ -1,4 +1,4 @@
-public class MenuOpcionesTarjetas extends SeleccionYPaginacion {
+class MenuOpcionesTarjetas extends SeleccionYPaginacion {
 
     public static void menu() {
 
@@ -12,14 +12,15 @@ public class MenuOpcionesTarjetas extends SeleccionYPaginacion {
                 Terminal.nuevaTarjeta();
                 Terminal.nuevaTarjeta();
                 Terminal.nuevaTarjeta();
-                menu();
+                break;
             case '2':
                 selectPlayerSaveVariables();
                 modificarTarjeta(indexPlayerSelected);
-                resetStaticVariables();
                 break;
             default:
+                return;
         }
+        menu();
     }
 
     public static void modificarTarjeta(int index) {
@@ -30,14 +31,14 @@ public class MenuOpcionesTarjetas extends SeleccionYPaginacion {
                 "0 - Back");
 
         switch (inputChar()) {
+            //Huh, both early return
             case '1':
                 Terminal.quitarTarjeta(index);
-                //TODO: check if this breaks
-                seleccionDeItem(arrayTarjetas());
+                return;
             case '2':
                 nuevoNombreParaTarjeta(selectedPlayer);
+                return;
             default:
-                break;
         }
     }
 

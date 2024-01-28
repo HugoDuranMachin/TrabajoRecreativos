@@ -1,5 +1,4 @@
-public class MenuRecreativas  extends SeleccionYPaginacion {
-
+public class MenuRecreativas extends SeleccionYPaginacion {
 
     static void menu() {
 
@@ -13,40 +12,51 @@ public class MenuRecreativas  extends SeleccionYPaginacion {
         optionsForMenu(inputChar());
     }
 
-    static void optionsForMenu(int selection) {
+    static void optionsForMenu(char selection) {
         switch (selection) {
             case '1':
-                selectedPlayer = selectPlayer();
-                menu();
+                selectPlayer();
                 break;
             case '2':
-                if (selectedPlayer == null) {
+                if (!isAPlayerSelected()) {
                     System.out.println("Por favor elige una tarjeta!");
-                    menu();
+                    break;
                 }
                 playGame();
                 break;
             case '3':
-                if (selectedTerminal == null) {
+                if (!isATerminalSelected()) {
                     System.out.println("No hay una terminal seleccionada, por favor elige una terminal");
-                    selectTerminal();
+                    break;
                 }
-                menuTerminal(selectedTerminal);
+                menuParaTerminal();
                 break;
             case '4':
-                selectTerminal();
-                menuTerminal(selectedTerminal);
-        }
+                System.out.println("Elige una terminal: ");
+                selectTerminalSaveVariables();
+                if (!isATerminalSelected()) {
+                    System.out.println("Terminal no valida");
+                    break;
+                }
+                break;
+            default:
+                return;
+            }
+            menu();
     }
 
-    public static Tarjeta selectPlayer() {
+    public static void selectPlayer() {
         System.out.println("Elige una tarjeta: ");
         selectPlayerSaveVariables();
+        if (!isAPlayerSelected()) {
+            System.out.println("Targeta no valida");
+            return;
+        }
         System.out.println("Has seleccionado: " + selectedPlayer.getNombrePropietario());
-        return selectedPlayer;
     }
 
     public static void playGame() {
+        //TODO: more than the bare minimum!
         Juego j = new Juego("Cambio De Divisa", Main.randomInt(100));
         System.out.println("No han habido fuerzas de crear juegos!\n" +
                 "A cambio, mete créditos y recibe monedas!\n" +
@@ -57,18 +67,13 @@ public class MenuRecreativas  extends SeleccionYPaginacion {
         if (Main.inputChar() == '1') {//Codigo de Hugo
             System.out.println(j.jugar(selectedPlayer, j));
         }
-        menu();
     }
 
-    public static void selectTerminal() {
-        System.out.println("Elige una terminal: ");
-        selectedTerminal = listaTerminales.get(seleccionDeItem(arrayTerminales()));
-        System.out.println("Has seleccionado la terminal: " + selectedTerminal);
-    }
 
-    public static void menuTerminal(Terminal t) {
+    //TODO: Move to another file?
+    public static void menuParaTerminal() {
         System.out.println("Esta terminal tiene los siguientes premios: ");
-        System.out.println(t.premiosEnTerminal);
+        System.out.println(selectedTerminal.premiosEnTerminal);
 
         System.out.println("1 - Seleccionar un premio\n" +
                 "2 - Ver información de mi tarjeta\n" +
@@ -77,52 +82,83 @@ public class MenuRecreativas  extends SeleccionYPaginacion {
                 "5 - Intercambiar Creditos con otra tarjeta\n" +
                 "0 - Exit");
 
-        optionsForTerminal(t, Main.inputChar());
+        optionsForTerminal(inputChar());
     }
 
-    public static void optionsForTerminal(Terminal t, int selection) {
+    public static void optionsForTerminal(int selection) {
+        int amount;
+        if (selectedPlayer == null) {
+            System.out.println("No hay un jugador seleccionado, por favor elige una tarjeta");
+            return;
+        }
         switch (selection) {
             case '1':
-                selectedTerminal.seleccionarPremioDeTerminal(selectedPlayer);
+                seleccionarPremioDeTerminal(selectedPlayer);
                 break;
             case '2':
                 System.out.println(selectedPlayer.info());
                 break;
             case '3':
-                selectedTerminal.menuRecargarCreditos(selectedPlayer);
+                Terminal.menuRecargarCreditos(selectedPlayer);
                 break;
             case '4':
-                selectedTerminal.transferirTickets(selectedPlayer, targetUser(), inputInt());
+                try {
+                    askAndTransferBetweenUsers();
+                    System.out.println("Di cuantos tickets a transferir");
+                    amount = inputInt();
+                } catch (Exception ignored) {
+                    System.out.println("Algo ha ido mal");
+                    break;
+                }
+                Terminal.transferirTickets(selectedPlayer, targetPlayer, amount);
                 break;
             case '5':
-                selectedTerminal.transferirCreditos(selectedPlayer, targetUser(), inputInt());
+                try {
+                    askAndTransferBetweenUsers();
+                    System.out.println("Di cuantos creditos a transferir");
+                    amount = inputInt();
+                    Terminal.transferirCreditos(selectedPlayer, targetPlayer, amount);
+                } catch (Exception ignored) {}
                 break;
             default:
-                menu();
-                break;
+                return;
         }
-        menuTerminal(t);
+        menuParaTerminal(); //(This is right, stop changing it)
     }
 
-    public static Tarjeta targetUser() {
-        System.out.println("Elige una segunda tarjeta recipiente: ");
-        Tarjeta t2 = selectPlayer();
-        if (t2 == selectedPlayer) {
-            System.out.println("Silly, that's you!");
-            menuTerminal(selectedTerminal);
+    static void askAndTransferBetweenUsers() throws Exception {
+        System.out.println("¿Quien sera el recipiente?");
+        selectTargetPlayer();
+        if (isSourceAndTargetSame() | targetPlayer == null) {
+            System.out.println("Eleccion invalida");
+            throw new Exception();
         }
-        return t2;
     }
 
-    public static int inputInt() {
-        System.out.println("Dame una cantidad: ");
-        try {
-            return Integer.parseInt(Main.inputFull());
-        } catch (Exception ignored) {
-            System.out.println("No has metido un numero");
-            menuTerminal(selectedTerminal);
+    //This is scuff and I'll probably rewrite it?
+    static void selectTargetPlayer() {
+        targetPlayer = selectedPlayer;
+        int buffer = indexPlayerSelected;
+        selectPlayer(); //Overwrites selectedPlayer and indexPlayerSelected
+        selectedPlayer = targetPlayer; //selectedPlayer is the first player selected now
+        targetPlayer = mapaTarjetas.get(indexPlayerSelected); //targetPlayer is the second
+        indexPlayerSelected = buffer; //I couldn't make this fancier
+    }
+
+
+
+    static void seleccionarPremioDeTerminal(Tarjeta t) {
+        System.out.println("Qué premio quieres elegir?");
+        selectPremioFromTerminalSaveVariables(selectedTerminal);
+        System.out.println("Premio elegido: " + selectedPremio);
+        System.out.println("Precio: " + selectedPremio.getTicketsNecesarios());
+        System.out.println("Tickets disponibles: " + t.getSaldoTickets());
+        System.out.println("1: Comprar\n" +
+                "0: Exit");
+
+        if (inputChar() == '1') {
+            Terminal.canjearPremio(t, selectedPremio, 1);
         }
-        return 0;
     }
 }
 

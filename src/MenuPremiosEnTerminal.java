@@ -15,18 +15,15 @@ public class MenuPremiosEnTerminal extends MenuOpcionesTerminales {
         switch (selection) {
             case '1':
                 selectedTerminal.premiosEnTerminal.remove(indexPremioSelected);
-                modificarTerminal(selectedTerminal);
                 break;
             case '2':
-                MenuOpcionesPremios.menuModificarPremio(selectedPremio, indexPremioSelected);
+                MenuModificarPremios.menu();
                 switchForMenu(selection);
-                break;
+                return;
             default:
-                resetStaticVariables();
-                break;}
-
-        modificarTerminal(selectedTerminal);
-
+                return;
+        }
+        menu();
     }
 
 

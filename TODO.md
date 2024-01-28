@@ -1,32 +1,15 @@
-TODO: UNSORTED
+The menus are coded in the following way:
 
-TODO: (Terminal.java)
+All menus are looping
+This means the menu calls itself at the end of the function.
+When anything that isn't 1-9 (hereby 0) is pressed, the function 
+    returns early, without reaching the loop.
 
-    CREAR SISTEMA DE CANJEO DE PREMIOS
-        IMPRIMIR MENSAJE ERROR SI PREMIO FUERA DE STOCK
-       
-    [DONE] LA TERMINAL SE INICIA CON UN CONSTRUCTOR QUE RECIBE N PREMIOS
-        [DONE] LOS PREMIOS VENDRÁN DE UNA ARRAYLIST DINÁMICA BASADA EN LOS TIPOS DE PREMIOS DISPONIBLES
-        [DONE] LA TERMINAL SÓLO PODRÁ DISPENSAR ESTE TIPO DE PREMIOS
-        [] LA TERMINAL RECIBE EL STOCK DEL PREMIO CON EL QUE SE CONSTRUYE
-     
-    FUNCIONALIDAD PARA CREAR TARJETAS DESDE DENTRO DE UNA TERMINAL
-        LOGICA PARA NO CREAR TARJETAS DEL MISMO UID
+Every submenu will work equally, so that pressing 0 will act 
+    equal to "going back" one layer. This has the added benefit
+    of being able to call any menu from any other without having
+    to keep track of which menu was open last.
 
-    funcionalidad para mostrar todas las tarjetas que existan 
-        en la ArrayList indiceUsuarios
+If a menu is required to early return (an object deletes itself)
+    another early return will be called
 
-TODO: (Main.java)
-
-    excepción si numeroTarjeta no existe
-    
-
-TODO: (Tarjeta.java) 
-
-    añadir más información al constructor (nombre, relleno)
-    opcional: añadir nombre/información aleatorio?
-    
-TODO: (myMethods.java)
-
-    Crear Tarjetas de número aleatorio, usar todas las funciones de Tarjeta, Eliminar estas tarjetas (puesto que son un test case),
-    comprobar que los ArrayList están en orden (Mismo tamaño, etc)

@@ -1,7 +1,6 @@
 public class MenuOpcionesTerminales extends SeleccionYPaginacion {
     public static void menu() {
 
-        resetStaticVariables();
         System.out.println("Actualmente hay " + listaTerminales.size() + " Terminales");
         System.out.println("1 - Cargar dos terminales\n" +
                 "2 - Ver y Modificar Terminales\n" +
@@ -11,16 +10,18 @@ public class MenuOpcionesTerminales extends SeleccionYPaginacion {
             case '1':
                 addTerminal();
                 addTerminal();
-                menu();
+                break;
             case '2':
                 selectTerminalSaveVariables();
+                if (!isATerminalSelected()) {
+                    break;
+                }
                 modificarTerminal(selectedTerminal);
-                resetStaticVariables();
-                menu();
                 break;
             default:
-                break;
+                return;
         }
+        menu();
     }
 
     public static void modificarTerminal(Terminal t) {
@@ -33,17 +34,17 @@ public class MenuOpcionesTerminales extends SeleccionYPaginacion {
         switch (inputChar()) {
             case '1':
                 listaTerminales.remove(indexTerminalSelected);
-                //huh, clever, how did I manage
-                verPagina(arrayTerminales(), 1);
-                break;
+                return;
             case '2':
                 selectPremioFromTerminalSaveVariables(t);
+                if (!isAPrizeSelected()) {
+                    break;
+                }
                 MenuPremiosEnTerminal.menu();
                 break;
             default:
-                break;
+                return;
         }
-        resetStaticVariables();
-        menu();
+        modificarTerminal(t);
     }
 }
