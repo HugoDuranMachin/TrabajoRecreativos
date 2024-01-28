@@ -1,4 +1,4 @@
-public abstract class MenuOpcionesPremios extends DriverMenu {
+abstract class MenuOpcionesPremios extends SeleccionYPaginacion {
     public static void menu() {
 
         resetStaticVariables();
@@ -8,7 +8,7 @@ public abstract class MenuOpcionesPremios extends DriverMenu {
                 "3 - Ver y Modificar premios\n" +
                 "0 - Back");
 
-        switchForMenu(input());
+        switchForMenu(inputChar());
     }
 
     public static void switchForMenu(char selection) {
@@ -28,7 +28,6 @@ public abstract class MenuOpcionesPremios extends DriverMenu {
                 resetStaticVariables();
                 break;
             default:
-                DriverMenu.menu();
                 break;
         }
     }
@@ -51,7 +50,6 @@ public abstract class MenuOpcionesPremios extends DriverMenu {
     }
 
     static int nuevoStockParaPremio() {
-
         System.out.println("¿Stock?\n" +
                 "No he hecho que esto mire si es un número o no! " +
                 "Ahora mismo no me importa!\n" +
@@ -88,8 +86,7 @@ public abstract class MenuOpcionesPremios extends DriverMenu {
                 "5 - Modificar su stock\n" +
                 "0 - Back");
 
-        pointerToLastMenuAccessed = input();
-        switchForMenuModificarPremio(pointerToLastMenuAccessed, p, index);
+        switchForMenuModificarPremio(inputChar(), p, index);
     }
 
     //TODO: pretty sure this can take no variables

@@ -1,4 +1,4 @@
-public class MenuRecreativas  extends DriverMenu {
+public class MenuRecreativas  extends SeleccionYPaginacion {
 
 
     static void menu() {
@@ -10,7 +10,7 @@ public class MenuRecreativas  extends DriverMenu {
                 "4 - Cambiar la terminal actual (" + terminal + ")\n" +
                 "0 - Exit");
 
-        optionsForMenu(input());
+        optionsForMenu(inputChar());
     }
 
     static void optionsForMenu(int selection) {
@@ -36,10 +36,7 @@ public class MenuRecreativas  extends DriverMenu {
             case '4':
                 selectTerminal();
                 menuTerminal(selectedTerminal);
-            default:
-                DriverMenu.menu();
         }
-
     }
 
     public static Tarjeta selectPlayer() {
@@ -57,7 +54,7 @@ public class MenuRecreativas  extends DriverMenu {
                 "Tienes: " + selectedPlayer.getSaldoCreditos() + " creditos\n" +
                 "¿Quieres Jugar?\n" + "1: ¡Sí!\n" + "0: Exit");
 
-        if (Main.input() == '1') {//Codigo de Hugo
+        if (Main.inputChar() == '1') {//Codigo de Hugo
             System.out.println(j.jugar(selectedPlayer, j));
         }
         menu();
@@ -80,7 +77,7 @@ public class MenuRecreativas  extends DriverMenu {
                 "5 - Intercambiar Creditos con otra tarjeta\n" +
                 "0 - Exit");
 
-        optionsForTerminal(t, Main.input());
+        optionsForTerminal(t, Main.inputChar());
     }
 
     public static void optionsForTerminal(Terminal t, int selection) {

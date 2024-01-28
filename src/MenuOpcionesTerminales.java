@@ -1,4 +1,4 @@
-public class MenuOpcionesTerminales extends DriverMenu {
+public class MenuOpcionesTerminales extends SeleccionYPaginacion {
     public static void menu() {
 
         resetStaticVariables();
@@ -7,7 +7,7 @@ public class MenuOpcionesTerminales extends DriverMenu {
                 "2 - Ver y Modificar Terminales\n" +
                 "0 - Back");
 
-        switch (input()) {
+        switch (inputChar()) {
             case '1':
                 addTerminal();
                 addTerminal();
@@ -21,7 +21,6 @@ public class MenuOpcionesTerminales extends DriverMenu {
             default:
                 break;
         }
-        DriverMenu.menu();
     }
 
     public static void modificarTerminal(Terminal t) {
@@ -31,19 +30,20 @@ public class MenuOpcionesTerminales extends DriverMenu {
                 "2 - Modificar los premios de la terminal\n" +
                 "0 - Back");
 
-        switch (input()) {
+        switch (inputChar()) {
             case '1':
                 listaTerminales.remove(indexTerminalSelected);
                 //huh, clever, how did I manage
                 verPagina(arrayTerminales(), 1);
                 break;
             case '2':
+                selectPremioFromTerminalSaveVariables(t);
                 MenuPremiosEnTerminal.menu();
                 break;
             default:
                 break;
         }
-        resetStaticVariables(); //paranoia
+        resetStaticVariables();
         menu();
     }
 }

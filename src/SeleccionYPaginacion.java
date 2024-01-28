@@ -1,50 +1,12 @@
-public abstract class DriverMenu extends Main{
+public abstract class SeleccionYPaginacion extends Main {
 
-    static char pointerToLastMenuAccessed = 0;
     public static int currentPage = 1;
-
-     static void menu() {
-        System.out.println("1 - Cargar valores por defecto (Sobreescribe)\n" +
-                "2 - Modificar stock de premios\n" +
-                "3 - Modificar terminales\n" +
-                "4 - Modificar tarjetas (usuarios)\n" +
-                "5 - Iniciar Recreativas!\n" +
-                "0 - Exit");
-
-        pointerToLastMenuAccessed = input();
-        optionsForMenu(pointerToLastMenuAccessed);
-    }
-
-    static void optionsForMenu(int selection) {
-        switch (selection) {
-            case '1':
-                loadDefaults();
-                menu();
-            case '2':
-                MenuOpcionesPremios.menu();
-                break;
-            case '3':
-                MenuOpcionesTerminales.menu();
-                break;
-            case '4':
-                MenuOpcionesTarjetas.menu();
-                break;
-            case '5':
-                MenuRecreativas.menu();
-                break;
-            case '0':
-            default:
-                return;
-        }
-        menu();
-    }
-
     static int output;
 
     public static int seleccionDeItem(Object[] obj) {
         verPagina(obj, currentPage);
-        char selection = input();
-        switch (selection) {
+        char buf = inputChar();
+        switch (buf) {
             case '1':
             case '2':
             case '3':
@@ -52,7 +14,7 @@ public abstract class DriverMenu extends Main{
             case '5':
             case '6':
             case '7':
-                output = ((selection - 49) + ((currentPage - 1) * 7)); //char to int and then base 0d
+                output = ((buf - 49) + ((currentPage - 1) * 7)); //char to int and then base 0d
                 currentPage = 1;
                 break;
             case '8':
@@ -66,7 +28,6 @@ public abstract class DriverMenu extends Main{
             case '0':
             default:
                 currentPage = 1;
-                optionsForMenu(pointerToLastMenuAccessed);
                 break;
         }
         return output;
@@ -114,7 +75,6 @@ public abstract class DriverMenu extends Main{
         selectedPremio = stockPremios.listaPremios.get(indexPremioSelected);
     }
 
-    //TODO: Just this?
     static void selectPremioFromTerminalSaveVariables(Terminal t) {
         indexPremioSelected = seleccionDeItem(arrayPremiosEnTerminal(t));
         selectedPremio = t.premiosEnTerminal.get(indexPremioSelected);

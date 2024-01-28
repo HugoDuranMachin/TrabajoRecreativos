@@ -1,4 +1,4 @@
-public class MenuOpcionesTarjetas extends DriverMenu {
+public class MenuOpcionesTarjetas extends SeleccionYPaginacion {
 
     public static void menu() {
 
@@ -7,7 +7,7 @@ public class MenuOpcionesTarjetas extends DriverMenu {
                 "2 - Ver y Modificar Tarjetas\n" +
                 "0 - Back");
 
-        switch (input()) {
+        switch (inputChar()) {
             case '1':
                 Terminal.nuevaTarjeta();
                 Terminal.nuevaTarjeta();
@@ -19,7 +19,6 @@ public class MenuOpcionesTarjetas extends DriverMenu {
                 resetStaticVariables();
                 break;
             default:
-                DriverMenu.menu();
         }
     }
 
@@ -30,7 +29,7 @@ public class MenuOpcionesTarjetas extends DriverMenu {
                 "2 - Modificar su nombre\n" +
                 "0 - Back");
 
-        switch (input()) {
+        switch (inputChar()) {
             case '1':
                 Terminal.quitarTarjeta(index);
                 //TODO: check if this breaks

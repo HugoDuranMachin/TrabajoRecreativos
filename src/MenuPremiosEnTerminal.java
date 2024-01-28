@@ -1,30 +1,25 @@
-import java.util.ArrayList;
-
 public class MenuPremiosEnTerminal extends MenuOpcionesTerminales {
 
-    public static void menu(int indexPremioSeleccionado, Premio selectedPremio) {
-
-        Object[] premiosForT = arrayPremiosEnTerminal(selectedTerminal);
-
+    public static void menu() {
         System.out.println("Que desea hacer con " + selectedPremio + " con relacion a " + selectedTerminal);
 
         System.out.println("1 - Eliminar el premio DE LA TERMINAL\n" +
                 "2 - Modificar los atributos del premio (GLOBAL)\n" +
                 "0 - Back");
 
-        switchForMenu(input(), selectedTerminal.premiosEnTerminal);
+        switchForMenu(inputChar());
     }
 
-    public static void switchForMenu(int selection, ArrayList<Premio> premiosEnTerminal) {
+    public static void switchForMenu(int selection) {
         
         switch (selection) {
             case '1':
-                premiosEnTerminal.remove(indexPremioSelected);
+                selectedTerminal.premiosEnTerminal.remove(indexPremioSelected);
                 modificarTerminal(selectedTerminal);
                 break;
             case '2':
                 MenuOpcionesPremios.menuModificarPremio(selectedPremio, indexPremioSelected);
-                switchForMenu(selection, premiosEnTerminal);
+                switchForMenu(selection);
                 break;
             default:
                 resetStaticVariables();

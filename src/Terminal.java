@@ -18,7 +18,7 @@ public class Terminal extends Main {
     static Premio premioAleatorioDeStock(StockPremios stockPremios) {
         if (stockPremios.listaPremios.isEmpty()) {
             System.out.println("No hay premios que cargar en terminales! ERROR!");
-            DriverMenu.menu();
+            return null;
         }
         return stockPremios.listaPremios.get(randomInt(stockPremios.listaPremios.size()));
     }
@@ -78,14 +78,14 @@ public class Terminal extends Main {
 
     public void seleccionarPremioDeTerminal(Tarjeta t) {
         System.out.println("Qué premio quieres elegir?");
-        Premio premioSelected = premiosEnTerminal.get(DriverMenu.seleccionDeItem(premiosEnTerminal.toArray()));
+        Premio premioSelected = premiosEnTerminal.get(SeleccionYPaginacion.seleccionDeItem(premiosEnTerminal.toArray()));
         System.out.println("Premio elegido: " + premioSelected);
         System.out.println("Precio: " + premioSelected.getTicketsNecesarios());
         System.out.println("Tickets disponibles: " + t.getSaldoTickets());
         System.out.println("1: Comprar\n" +
                 "0: Exit");
 
-        if (input() == '1') {
+        if (inputChar() == '1') {
             canjearPremio(t, premioSelected, 1);
         }
     }
