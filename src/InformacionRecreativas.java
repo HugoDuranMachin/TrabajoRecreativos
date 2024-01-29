@@ -42,16 +42,18 @@ abstract class InformacionRecreativas {
     }
 
     static char inputChar() {
-        return inputFull().charAt(0);
+        String buf = inputFull();
+            return (buf.isEmpty()) ? inputChar() : buf.charAt(0);
     }
 
     static String inputFull() {
-        return sc.nextLine();
+        String buf = sc.nextLine();
+        return buf.isEmpty() ? inputFull() : buf;
     }
 
     static int inputInt(){
             try {
-                Integer.parseInt(inputFull());
+                return Integer.parseInt(inputFull());
             } catch (Exception ignored) {
                 System.out.println("No has metido un numero");
             }
