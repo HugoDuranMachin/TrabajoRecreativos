@@ -20,7 +20,6 @@ public class Terminal extends Main {
     public static void menuRecargarCreditos(Tarjeta t) {
         System.out.println("Cuanto dinero quieres meter?");
         int dineroMetido = inputInt();
-        System.out.println(dineroMetido);
         System.out.println("Tenias " + t.getSaldoCreditos() + " creditos");
         recargarCreditos(t, dineroMetido);
         System.out.println("Has metido " + dineroMetido + " Dineros");
